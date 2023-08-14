@@ -4,11 +4,13 @@
     inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     outputs = {self, nixpkgs, home-manager }: {
-        nixosConfigurations = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-                ./configuration.nix
-            ];
+        nixosConfigurations = {
+            mbk = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                modules = [
+                    ./configuration.nix
+                ];
+            };
         };
     };
 }
