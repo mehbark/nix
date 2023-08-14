@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   /* The home.stateVersion option does not have a default and must be set */
-  home.stateVersion = "18.09";
+  home.stateVersion = "22.05";
   home.packages = with pkgs; [
     firefox
     clojure
