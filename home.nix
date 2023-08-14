@@ -7,7 +7,6 @@
     firefox
     clojure
     deno
-    kitty
     # bsdgames
     fortune
     cowsay
@@ -97,5 +96,10 @@
   gruvbox
     ];
     extraConfig = import ./nvim.conf.nix;
+  };
+
+  programs.kitty = {
+    enable = true;
+    extraConfig = import ./kitty.conf.nix;
   };
 }
