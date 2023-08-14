@@ -101,6 +101,10 @@
       cores = 3;
       graphics = true;
     };
+    users.users.root = {
+      isSystemUser = true;
+      initialPassword = "";
+    };
   };
 
   services.openssh = {

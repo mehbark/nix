@@ -16,13 +16,14 @@
     # lutris
     # mono5
     nethack
-    chezmoi
+    # chezmoi
     # wineWowPackages.stable
     # winetricks
     # foliate
   #  thunderbird
     starship
     exa
+    ghc
   ];
 
   programs.fish = {
@@ -31,11 +32,12 @@
     shellInit = import ./fish.conf.nix;
   };
 
-  # programs.vscode = {
-  #   enable = true;
-  #   # i prefer to let vscode manage stuff
-  #   mutableExtensionsDir = true;
-  # };
+  programs.vscode = {
+    enable = true;
+    enableUpdateCheck = false;
+    # i prefer to let vscode manage stuff
+    mutableExtensionsDir = true;
+  };
 
   programs.neovim = {
     enable = true;
