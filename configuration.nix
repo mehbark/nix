@@ -87,10 +87,12 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
   users.users.mbk = {
     isNormalUser = true;
     description = "mehbark";
     extraGroups = [ "networkmanager" "wheel" ];
+    hashedPassword = "$6$AgDjrnyBPBpfMpB1$NxjyeU/WxsOXrY7KpnJethtGz28LO.hNARG5J8adIoxDFkBVG/H9wJEiG0A09E7JgguoPxFWmwYIBQLTbknVv1";
   };
 
   virtualisation.vmVariant = {
