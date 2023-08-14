@@ -10,7 +10,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-  }
+  };
 
   imports =
     [ # Include the results of the hardware scan.
