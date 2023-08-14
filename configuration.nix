@@ -93,6 +93,21 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
+  virtualization.vmVariant = {
+    virtualization = {
+      memorySize = 2048;
+      cores = 3;
+      graphics = true;
+    };
+  };
+
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+  };
+
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
   # services.emacs.enable = true;
   # services.emacs.package = import /home/mbk/.emacs.d { pkgs = pkgs; };
   # services.emacs.defaultEditor = true;
