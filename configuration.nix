@@ -93,8 +93,8 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
 
-  virtualization.vmVariant = {
-    virtualization = {
+  virtualisation.vmVariant = {
+    virtualisation = {
       memorySize = 2048;
       cores = 3;
       graphics = true;
