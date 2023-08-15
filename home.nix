@@ -148,4 +148,10 @@ in
     enable = true;
     enableNvidiaPatches = true;
   } else {};
+
+  # xsession.windowManager.i3 = if wm == "i3"
+  # then {
+  #   enable = true;
+
+  # } else {};
 }

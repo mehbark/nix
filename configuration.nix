@@ -72,14 +72,16 @@ in
       sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
     };
     windowManager = {
-      i3.enable = conf.wm == "i3";
-      extraPackages = if conf.wm == "i3"
-      then with pkgs; [
-        dmenu
-        i3status
-        i3lock
-        i3blocks
-      ] else [];
+      i3 = if conf.wm == "i3" then {
+        enable = true;
+        extraPackages =
+        with pkgs; [
+          dmenu
+          i3status
+          i3lock
+          i3blocks
+        ];
+      } else {};
     };
   };
 
