@@ -1,6 +1,6 @@
 with builtins;
 {
-  wm = "i3";
+  wm = "plasma";
 
   # very, very non-exhaustive of course
   is-x11     = wm: elem wm ["plasma" "xmonad" "i3"];

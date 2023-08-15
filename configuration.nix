@@ -67,9 +67,15 @@ in
     desktopManager = {
       plasma5.enable = conf.wm == "plasma";
       xterm.enable = false;
+      xfce = if conf.wm == "i3" then {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+      } else {};
     };
     displayManager = {
       sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
+      defaultSession = if conf.wm == "i3" then "xfce+i3" else null;
     };
     windowManager = {
       i3 = if conf.wm == "i3" then {
