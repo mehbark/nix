@@ -134,7 +134,8 @@ in
       enable = true;
       config = pkgs.writeText "xmonad.hs" ''
         import XMonad
-        main = xmonad def
+        import XMonad.Config.Kde
+        main = xmonad kde4Config
             { terminal    = "kitty"
             , modMask     = mod4Mask
             , borderWidth = 1

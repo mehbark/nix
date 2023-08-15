@@ -61,8 +61,8 @@ in
   services.xserver.enable = x11;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = conf.wm == "kde";
-  services.xserver.desktopManager.plasma5.enable = conf.wm == "kde";
+  services.xserver.displayManager.sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
+  services.xserver.desktopManager.plasma5.enable = conf.wm == "plasma";
 
   # Configure keymap in X11
   services.xserver = {
