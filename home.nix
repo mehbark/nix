@@ -14,7 +14,6 @@ in
     # bsdgames
     fortune
     cowsay
-    git
     sbcl
     lispPackages.trivia
     # lutris
@@ -128,6 +127,19 @@ in
   programs.kitty = {
     enable = true;
     extraConfig = import ./kitty.conf.nix;
+  };
+
+  programs.git = {
+    enable = true;
+    extraConfig = {
+        userName = "mehbark";
+        userEmail = "terezi@pyrope.net";
+    };
+  };
+
+  programs.git.difftastic = {
+    enable = true;
+    background = "dark";
   };
 
   xsession.windowManager.xmonad = if wm == "xmonad" then {
