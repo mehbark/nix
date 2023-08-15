@@ -3,13 +3,19 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+    use-x11 = true;
+in
 {
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    settings = {
+        substituters = ["https://hyprland.cachix.org"];
+        trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
   };
 
   imports =
@@ -51,17 +57,19 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver.enable = use-x11;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enable = use-x11;
+  services.xserver.desktopManager.plasma5.enable = use-x11;
 
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
+
+  programs.hyprland.enable = !use-x11;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -127,6 +135,7 @@
      neovim
      wget
      unzip
+     wayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
