@@ -134,7 +134,7 @@ in
       enable = true;
       config = pkgs.writeText "xmonad.hs" ''
         import XMonad
-        main = xmonad defaultConfig
+        main = xmonad def
             { terminal    = "kitty"
             , modMask     = mod4Mask
             , borderWidth = 1
