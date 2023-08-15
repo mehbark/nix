@@ -166,7 +166,7 @@ in
   then ''
     IdleAction=hybrid-sleep
     IdleActionSec=20s
-  '' else ""
+  '' else "";
 
   # List services that you want to enable:
 
