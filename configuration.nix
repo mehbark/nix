@@ -162,7 +162,7 @@ in
   '' else "";
 
   systemd.targets.hybrid-sleep.enable = conf.wm == "xmonad";
-  systemd.logind.extraConfig = if conf.wm == "xmonad"
+  services.logind.extraConfig = if conf.wm == "xmonad"
   then ''
     IdleAction=hybrid-sleep
     IdleActionSec=20s
