@@ -1,3 +1,6 @@
+with builtins;
 {
-  use-kde = true;
+  wm = "kde";
+
+  is-x11 = wm: elem wm ["kde" "xmonad"];
 }

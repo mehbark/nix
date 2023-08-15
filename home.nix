@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
-  use-kde = (import ./build.conf.nix).use-kde;
+  conf = import ./build.conf.nix;
+  wm = conf.wm;
 in
 {
   /* The home.stateVersion option does not have a default and must be set */
@@ -128,22 +129,21 @@ in
     extraConfig = import ./kitty.conf.nix;
   };
 
-  # xsession.windowManager.xmonad = if use-kde then {
-  #     enable = true;
-  #     config = pkgs.writeText "xmonad.hs" ''
-  #       import XMonad
-  #       main = xmonad defaultConfig
-  #           { terminal    = "kitty"
-  #           , modMask     = mod4Mask
-  #           , borderWidth = 3
-  #           }
-  #     '';
-  # } else {};
+  xsession.windowManager.xmonad = if wm == "xmonad" then {
+      enable = true;
+      config = pkgs.writeText "xmonad.hs" ''
+        import XMonad
+        main = xmonad defaultConfig
+            { terminal    = "kitty"
+            , modMask     = mod4Mask
+            , borderWidth = 3
+            }
+      '';
+  } else {};
 
-  wayland.windowManager.hyprland = if use-kde
-  then {}
-  else {
+  wayland.windowManager.hyprland = if wm == "hyprland"
+  then {
     enable = true;
     enableNvidiaPatches = true;
-  };
+  } else {};
 }

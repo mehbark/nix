@@ -4,7 +4,8 @@
 
 { config, pkgs, ... }:
 let
-    use-kde = (import ./build.conf.nix).use-kde;
+    conf = import ./build.conf.nix;
+    x11 = conf.is-x11 conf.wm;
 in
 {
   nix = {
@@ -57,11 +58,11 @@ in
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = use-kde;
+  services.xserver.enable = x11;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = use-kde;
-  services.xserver.desktopManager.plasma5.enable = use-kde;
+  services.xserver.displayManager.sddm.enable = conf.wm == "kde";
+  services.xserver.desktopManager.plasma5.enable = conf.wm == "kde";
 
   # Configure keymap in X11
   services.xserver = {
