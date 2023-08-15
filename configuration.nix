@@ -70,6 +70,7 @@ in
   };
 
   programs.hyprland.enable = !use-x11;
+  programs.sway.enable = !use-x11;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
