@@ -153,6 +153,21 @@ in
     enableContribAndExtras = true;
   } else {};
 
+  services.xserver.displayManager.sessionCommands = if conf.wm == "xmonad"
+  then ''
+    xset -dpms
+    xset s blank
+    xset s 300
+    ${pkgs.lightlocker}/bin/lightlocker --idle-hint &
+  '' else "";
+
+  systemd.targets.hybrid-sleep.enable = conf.wm == "xmonad";
+  systemd.logind.extraConfig = if conf.wm == "xmonad"
+  then ''
+    IdleAction=hybrid-sleep
+    IdleActionSec=20s
+  '' else ""
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
