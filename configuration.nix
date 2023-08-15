@@ -57,17 +57,30 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = x11;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
-  services.xserver.desktopManager.plasma5.enable = conf.wm == "plasma";
-
-  # Configure keymap in X11
+  # x11 stuff
   services.xserver = {
+    enable = x11;
+
     layout = "us";
     xkbVariant = "";
+
+    desktopManager = {
+      plasma5.enable = conf.wm == "plasma";
+      xterm.enable = false;
+    };
+    displayManager = {
+      sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
+    };
+    windowManager = {
+      i3.enable = conf.wm == "i3";
+      extraPackages = if conf.wm == "i3"
+      then with pkgs; [
+        dmenu
+        i3status
+        i3lock
+        i3blocks
+      ] else [];
+    };
   };
 
   # Enable CUPS to print documents.
