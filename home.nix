@@ -108,5 +108,15 @@ in
     extraConfig = import ./kitty.conf.nix;
   };
 
-  xsession.windowManager.xmonad.enable = !use-kde;
+  xsession.windowManager.xmonad = if use-kde then {
+      enable = true;
+      config = pkgs.writeText "xmonad.hs" ''
+        import XMonad
+        main = xmonad defaultConfig
+            { terminal    = "kitty"
+            , modMask     = mod4Mask
+            , borderWidth = 3
+            }
+      '';
+  } else {};
 }
