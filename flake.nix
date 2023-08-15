@@ -8,19 +8,16 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, ... }:
   let
-    conf = (import ./build.conf.nix) {};
+    # :(
+    conf = (import ./build.conf.nix) { wm = "plasma"; };
   in
   {
     nixosConfigurations =
-    flake-utils.lib.eachSystem conf.wms (wm:
-    let
-      conf = import (./build.conf.nix) { wm = wm; };
-    in
     {
       nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          (./configuration.nix conf)
+          ((import ./configuration.nix) conf)
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -29,6 +26,6 @@
           }
         ];
       };
-    });
+    };
   };
 }

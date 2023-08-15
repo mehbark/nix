@@ -1,8 +1,7 @@
-{ wm ? null, ...}:
+input@{ wm ? null, ...}:
 with builtins;
+input //
 rec {
-  wm = wm;
-
   x11-wms = ["plasma" "xmonad" "i3"];
   wayland-wms = ["hyprland" "sway"];
   wms = x11-wms ++ wayland-wms;
