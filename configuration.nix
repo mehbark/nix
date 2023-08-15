@@ -2,9 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+build-conf:
 { config, pkgs, ... }:
 let
-    conf = import ./build.conf.nix;
+    conf = build-conf;
     x11 = conf.is-x11 conf.wm;
 in
 {

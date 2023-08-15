@@ -1,6 +1,7 @@
+build-conf:
 { config, pkgs, ... }:
 let
-  conf = import ./build.conf.nix;
+  conf = build-conf;
   wm = conf.wm;
 in
 {
@@ -131,10 +132,8 @@ in
 
   programs.git = {
     enable = true;
-    extraConfig = {
-        userName = "mehbark";
-        userEmail = "terezi@pyrope.net";
-    };
+    userName = "mehbark";
+    userEmail = "terezi@pyrope.net";
   };
 
   programs.git.difftastic = {
