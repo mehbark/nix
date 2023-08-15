@@ -55,7 +55,7 @@ in
 
       vim-bufkill
 
-  suda-vim
+      suda-vim
 
   # navigation
       nerdtree
@@ -108,15 +108,22 @@ in
     extraConfig = import ./kitty.conf.nix;
   };
 
-  xsession.windowManager.xmonad = if use-kde then {
-      enable = true;
-      config = pkgs.writeText "xmonad.hs" ''
-        import XMonad
-        main = xmonad defaultConfig
-            { terminal    = "kitty"
-            , modMask     = mod4Mask
-            , borderWidth = 3
-            }
-      '';
-  } else {};
+  # xsession.windowManager.xmonad = if use-kde then {
+  #     enable = true;
+  #     config = pkgs.writeText "xmonad.hs" ''
+  #       import XMonad
+  #       main = xmonad defaultConfig
+  #           { terminal    = "kitty"
+  #           , modMask     = mod4Mask
+  #           , borderWidth = 3
+  #           }
+  #     '';
+  # } else {};
+
+  wayland.windowManager.hyprland = if use-kde
+  then {}
+  else {
+    enable = true;
+    enableNvidiaPatches = true;
+  };
 }
