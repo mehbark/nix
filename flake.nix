@@ -5,7 +5,7 @@
   inputs.home-manager.url = "github:nix-community/home-manager";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = inputs@{ self, nixpkgs, home-manager, hyprland, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

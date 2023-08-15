@@ -1,3 +1,3 @@
 {
-  use-x11 = false;
+  use-kde = false;
 }

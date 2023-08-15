@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }:
 let
-    use-x11 = (import ./build.conf.nix).use-x11;
+    use-kde = (import ./build.conf.nix).use-kde;
 in
 {
   nix = {
@@ -57,19 +57,17 @@ in
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = use-x11;
+  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = use-x11;
-  services.xserver.desktopManager.plasma5.enable = use-x11;
+  services.xserver.displayManager.sddm.enable = use-kde;
+  services.xserver.desktopManager.plasma5.enable = use-kde;
 
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
-
-  programs.hyprland.enable = !use-x11;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

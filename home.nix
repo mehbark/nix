@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  use-x11 = (import ./build.conf.nix).use-x11;
+  use-kde = (import ./build.conf.nix).use-kde;
 in
 {
   /* The home.stateVersion option does not have a default and must be set */
@@ -108,5 +108,5 @@ in
     extraConfig = import ./kitty.conf.nix;
   };
 
-  xsession.windowManager.xmonad.enable = !use-x11;
+  xsession.windowManager.xmonad.enable = !use-kde;
 }
