@@ -45,6 +45,26 @@ in
   programs.neovim = {
     enable = true;
     coc.enable = true;
+    coc.settings = ''
+    {
+      "rust-analyzer.checkOnSave.command": "clippy",
+      "rust-analyzer.checkOnSave.extraArgs": ["-- -W clippy::pedantic"],
+      "languageserver": {
+        "ccls": {
+          "command": "ccls",
+          "filetypes": ["c", "cpp", "objc", "objcpp"],
+          "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+          "initializationOptions": {
+             "cache": {
+               "directory": "/tmp/ccls"
+             }
+           }
+        }
+      },
+      "inlayHint.enable": true,
+      "zig.zls.path": "/home/mbk/.config/coc/extensions/coc-zls-data/zls_install/zls"
+    }
+    '';
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       vim-airline

@@ -92,7 +92,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.mutableUsers = false;
   users.users.mbk = {
     isNormalUser = true;
@@ -124,7 +123,7 @@ in
   # services.emacs.package = import /home/mbk/.emacs.d { pkgs = pkgs; };
   # services.emacs.defaultEditor = true;
 
-  # Allow unfree packages
+  # Allow unfree packages (sorry)
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:

@@ -1,3 +1,3 @@
 {
-  use-kde = false;
+  use-kde = true;
 }
