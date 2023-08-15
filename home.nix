@@ -28,6 +28,7 @@ in
     starship
     exa
     ghc
+    dmenu
   ];
 
   programs.fish = {
@@ -136,7 +137,7 @@ in
         main = xmonad defaultConfig
             { terminal    = "kitty"
             , modMask     = mod4Mask
-            , borderWidth = 3
+            , borderWidth = 1
             }
       '';
   } else {};

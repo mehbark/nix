@@ -147,6 +147,12 @@ in
   environment.variables.SHELL  = "fish";
   environment.variables.TERM   = "kitty";
 
+  services.xserver.windowManager.xmonad = if conf.wm == "xmonad"
+  then {
+    enable = true;
+    enableContribAndExtras = true;
+  } else {};
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

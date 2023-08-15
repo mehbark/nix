@@ -1,6 +1,8 @@
 with builtins;
 {
-  wm = "kde";
+  wm = "xmonad";
 
-  is-x11 = wm: elem wm ["kde" "xmonad"];
+  # very, very non-exhaustive of course
+  is-x11     = wm: elem wm ["kde" "xmonad"];
+  is-wayland = wm: elem wm ["hyprland" "sway"];
 }
