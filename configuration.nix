@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }:
 let
-    use-x11 = true;
+    use-x11 = false;
 in
 {
   nix = {
