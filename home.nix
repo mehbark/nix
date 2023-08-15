@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  use-x11 = (import ./build.conf.nix).use-x11;
+in
 {
   /* The home.stateVersion option does not have a default and must be set */
   home.stateVersion = "22.05";
@@ -104,4 +107,28 @@
     enable = true;
     extraConfig = import ./kitty.conf.nix;
   };
+
+  wayland.windowManager.hyprland.extraConfig = ''
+    $mod = SUPER
+
+    bind = $mod, F, exec, firefox
+    bind = , Print, exec, grimblast copy area
+
+    # workspaces
+    # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+    ${builtins.concatStringsSep "\n" (builtins.genList (
+        x: let
+          ws = let
+            c = (x + 1) / 10;
+          in
+            builtins.toString (x + 1 - (c * 10));
+        in ''
+          bind = $mod, ${ws}, workspace, ${toString (x + 1)}
+          bind = $mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}
+        ''
+      )
+      10)}
+
+    # ...
+  '';
 }

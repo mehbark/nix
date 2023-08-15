@@ -4,7 +4,7 @@
 
 { config, pkgs, ... }:
 let
-    use-x11 = false;
+    use-x11 = (import ./build.conf.nix).use-x11;
 in
 {
   nix = {
@@ -70,7 +70,6 @@ in
   };
 
   programs.hyprland.enable = !use-x11;
-  programs.sway.enable = !use-x11;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
