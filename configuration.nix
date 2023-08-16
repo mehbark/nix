@@ -6,7 +6,6 @@ build-conf:
 { config, pkgs, ... }:
 let
     conf = build-conf;
-    x11 = conf.is-x11 conf.wm;
 in
 {
   nix = {
@@ -60,7 +59,7 @@ in
 
   # x11 stuff
   services.xserver = {
-    enable = x11;
+    enable = conf.is-x11;
 
     layout = "us";
     xkbVariant = "";
