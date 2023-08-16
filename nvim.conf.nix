@@ -1,4 +1,5 @@
 ''
+" TODO: really, really need to fix the whole path completion thing, i can see it but not actually do it
 let mapleader = ";"
 let maplocalleader = ";;"
 

@@ -160,7 +160,7 @@ rec {
     label-empty-padding = "2";
   };
 
-  module.i3 = {
+  module.i3 = rec {
     type = "internal/i3";
     format = "<label-state> <label-mode>";
     index-sort = "true";
@@ -182,10 +182,10 @@ rec {
     label-unfocused-padding = "1";
 
     label-visible = "%index%";
-    label-visible-background = "${self.label-focused-background}";
-    label-visible-foreground = "${self.label-focused-foreground}";
-    label-visible-underline = "${self.label-focused-underline}";
-    label-visible-padding = "${self.label-focused-padding}";
+    label-visible-background = "${label-focused-background}";
+    label-visible-foreground = "${label-focused-foreground}";
+    label-visible-underline = "${label-focused-underline}";
+    label-visible-padding = "${label-focused-padding}";
 
     label-urgent = "%index%";
     label-urgent-background = "${colors.alert}";
@@ -321,7 +321,7 @@ rec {
 
     format-volume = "<label-volume> <bar-volume>";
     label-volume = "VOL";
-    label-volume-foreground = "${root.foreground}";
+    #label-volume-foreground = "${root.foreground}";
 
     format-muted-prefix = " ";
     format-muted-foreground = "${colors.foreground-alt}";
@@ -345,7 +345,7 @@ rec {
     bar-volume-empty-foreground = "${colors.foreground-alt}";
   };
 
-  module.battery = {
+  module.battery = rec {
     type = "internal/battery";
     battery = "BAT0";
     adapter = "AC";
@@ -360,12 +360,12 @@ rec {
     format-charging-underline = "#ffb52a";
 
     format-discharging = "<ramp-capacity> <label-discharging>";
-    format-discharging-underline = "${self.format-charging-underline}";
+    format-discharging-underline = "${format-charging-underline}";
 
     format-full-font = "3";
     format-full-prefix = " ";
     format-full-prefix-foreground = "${colors.foreground}";
-    format-full-underline = "${self.format-charging-underline}";
+    format-full-underline = "${format-charging-underline}";
 
 
     ramp-capacity-0 = "";
@@ -387,7 +387,7 @@ rec {
     animation-discharging-framerate = "750";
   };
 
-  module.temperature = {
+  module.temperature = rec {
     type = "internal/temperature";
     thermal-zone = "0";
     warn-temperature = "60";
@@ -395,7 +395,7 @@ rec {
     format = "<label>";
     format-underline = "#f50a4d";
     format-warn = "<ramp> <label-warn>";
-    format-warn-underline = "${self.format-underline}";
+    format-warn-underline = "${format-underline}";
 
     label = "%temperature-c%";
     label-warn = "%temperature-c%";
@@ -464,3 +464,10 @@ rec {
     margin-bottom = "5";
   };
 }
+# dumping this here
+# config = {
+#   client.focused          = ["#665c54" "#665c54" "#121212" "#665c54" "#a89984"];
+#   client.unfocused        = ["#282828" "#282828" "#a89984" "#282828" "#282828"];
+#   client.focused_inactive = ["#282828" "#282828" "#a89984" "#282828" "#282828"];
+#   client.urgent           = ["#282828" "#282828" "#a89984" "#282828" "#282828"];
+# };

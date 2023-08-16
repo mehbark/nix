@@ -75,9 +75,10 @@ in
     };
     displayManager = {
       sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
-      defaultSession = if conf.wm == "i3" then "xfce" else null;
+      defaultSession = if conf.wm == "i3" then "xfce+i3" else null;
     };
     windowManager = {
+      i3.enable = conf.wm == "i3";
     };
   };
 
