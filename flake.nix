@@ -19,7 +19,7 @@
   let
     # :(
     # could do like nix-i3, nix-hyprland but that would be LAME
-    conf = (import ./build.conf.nix) { wm = "i3"; };
+    conf = (import ./build.conf.nix) { wm = "plasma"; };
     modules = [
       ((import ./configuration.nix) conf)
       home-manager.nixosModules.home-manager

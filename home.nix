@@ -13,8 +13,10 @@ in
     clojure
     deno
     # bsdgames
+    # CRITICAL THREE
     fortune
     cowsay
+    ponysay
     sbcl
     lispPackages.trivia
     # lutris

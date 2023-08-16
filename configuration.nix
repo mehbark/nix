@@ -158,6 +158,9 @@ in
   environment.variables.EDITOR = "nvim";
   environment.variables.SHELL  = "fish";
   environment.variables.TERM   = "kitty";
+  # BAD IDEA! I DON'T HAVE A CONCRETE REASON, MAINLY JUST VIBES
+  # STILL MILES BETTER THAN NIX_AUTO_INSTALL THOUGH
+  environment.variables.NIX_AUTO_RUN = "1";
 
   services.xserver.windowManager.xmonad = if conf.wm == "xmonad"
   then {
