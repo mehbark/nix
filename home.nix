@@ -183,9 +183,32 @@ in
   '';
   } else {};
 
-  # xsession.windowManager.i3 = if wm == "i3"
-  # then {
-  #   enable = true;
+  wayland.windowManager.sway = if wm == "sway"
+  then {
+    enable = true;
+    config = rec {
+      modifier = "Mod4";
+      terminal = "kitty";
+      startup = [
+      ];
+    };
+  } else {};
 
-  # } else {};
+  services.polybar = if wm == "i3"
+  then {
+    enable = true;
+    script = "polybar bar &";
+    settings = import ./polybar.conf.nix;
+    config = {
+      client.focused =          ["#665c54" "#665c54" "#121212" "#665c54" "#a89984"];
+      client.unfocused =        ["#282828" "#282828" "#a89984" "#282828" "#282828"];
+      client.focused_inactive = ["#282828" "#282828" "#a89984" "#282828" "#282828"];
+      client.urgent =           ["#282828" "#282828" "#a89984" "#282828" "#282828"];
+    };
+  } else {};
+
+  xsession.windowManager.i3 = if wm == "i3"
+  then {
+        enable = true;
+  } else {};
 }

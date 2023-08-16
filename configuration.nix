@@ -75,19 +75,9 @@ in
     };
     displayManager = {
       sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
-      defaultSession = if conf.wm == "i3" then "xfce+i3" else null;
+      defaultSession = if conf.wm == "i3" then "xfce" else null;
     };
     windowManager = {
-      i3 = if conf.wm == "i3" then {
-        enable = true;
-        extraPackages =
-        with pkgs; [
-          dmenu
-          i3status
-          i3lock
-          i3blocks
-        ];
-      } else {};
     };
   };
 
