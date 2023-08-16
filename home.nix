@@ -204,5 +204,6 @@ in
   xsession.windowManager.i3 = if wm == "i3"
   then {
      enable = true;
+     extraConfig = import ./i3.conf.nix;
   } else {};
 }
