@@ -18,6 +18,7 @@ in
     cowsay
     ponysay
     sbcl
+    rlwrap
     lispPackages.trivia
     # lutris
     # mono5
@@ -31,6 +32,8 @@ in
     exa
     ghc
     dmenu
+    xsel
+    manix
   ];
 
   programs.fish = {
@@ -70,6 +73,7 @@ in
     }
     '';
     defaultEditor = true;
+    # should probably extract this out but meh
     plugins = with pkgs.vimPlugins; [
       vim-airline
       vim-airline-themes
@@ -81,11 +85,12 @@ in
 
       suda-vim
 
-  # navigation
+      # navigation
       nerdtree
       nerdtree-git-plugin
       plenary-nvim
       telescope-nvim
+      telescope-manix
 
       vim-rooter
       # Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -122,7 +127,7 @@ in
       elixir-tools-nvim
       #vim-rubocop
       zig-vim
-  gruvbox
+      gruvbox
     ];
     extraConfig = import ./nvim.conf.nix;
   };
@@ -208,4 +213,16 @@ in
      enable = true;
      extraConfig = import ./i3.conf.nix;
   } else {};
+
+  programs.readline = {
+    enable = true;
+    extraConfig = ''
+      set editing-mode vi
+      set keymap vi-command
+      "gg": beginning-of-history
+      "G": end-of-history
+      set keymap vi-insert
+      "jj": vi-movement-mode
+  '';
+  };
 }
