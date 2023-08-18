@@ -11,15 +11,13 @@ in
   home.packages = with pkgs; [
     firefox
     clojure
-    deno
     # bsdgames
     # CRITICAL THREE
     fortune
     cowsay
     ponysay
-    sbcl
-    rlwrap
     lispPackages.trivia
+    lispPackages.quicklisp
     # lutris
     # mono5
     nethack
@@ -30,10 +28,17 @@ in
   #  thunderbird
     starship
     exa
-    ghc
     dmenu
     xsel
     manix
+
+    rlwrap
+    # i like having easy access to a lot of repls
+    deno
+    ghc
+    sbcl
+    chez
+    racket
   ];
 
   programs.fish = {
