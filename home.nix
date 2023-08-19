@@ -40,6 +40,9 @@ in
     sbcl
     chez
     racket
+
+    discord
+    steam
   ];
 
   programs.fish = {
@@ -126,7 +129,6 @@ in
       # Plug 'neoclide/coc.nvim', {'branch': 'release'}
       coc-sh
       coc-json
-      coc-fish
 
       haskell-vim
 
