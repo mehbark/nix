@@ -31,6 +31,7 @@ in
     dmenu
     xsel
     manix
+    shellcheck
 
     rlwrap
     # i like having easy access to a lot of repls
@@ -123,6 +124,9 @@ in
 
       # CoC
       # Plug 'neoclide/coc.nvim', {'branch': 'release'}
+      coc-sh
+      coc-json
+      coc-fish
 
       haskell-vim
 
