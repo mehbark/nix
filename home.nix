@@ -227,13 +227,5 @@ in
 
   programs.readline = {
     enable = true;
-    extraConfig = ''
-      set editing-mode vi
-      set keymap vi-command
-      "gg": beginning-of-history
-      "G": end-of-history
-      set keymap vi-insert
-      "jj": vi-movement-mode
-  '';
   };
 }
