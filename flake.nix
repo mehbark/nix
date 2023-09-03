@@ -40,7 +40,7 @@
       };
     };
 
-    homeConfigurations."mbk@nix" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.mbk= home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
       modules = if conf.wm == "hyprland" then modules ++ [
