@@ -43,6 +43,7 @@ in
 
     discord
     steam
+    fzf
   ];
 
   programs.fish = {
@@ -102,6 +103,7 @@ in
       telescope-manix
 
       vim-rooter
+      fzfWrapper
       # Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
       # Plug 'junegunn/fzf.vim'
       # Plug 'jlanzarotta/bufexplorer'
@@ -226,6 +228,10 @@ in
   } else {};
 
   programs.readline = {
+    enable = true;
+  };
+
+  programs.emacs = {
     enable = true;
   };
 }
