@@ -10,7 +10,6 @@ in
 
   home.packages = with pkgs; [
     firefox
-    clojure
     # bsdgames
     # CRITICAL THREE
     fortune
@@ -40,10 +39,15 @@ in
     sbcl
     chez
     racket
+    clojure
 
     discord
     steam
     fzf
+
+    idris2
+    # emacsPackages.idris2-mode
+    # emacsPackages.evil
   ];
 
   programs.fish = {
@@ -231,6 +235,7 @@ in
     enable = true;
   };
 
+  services.emacs.client.enable = true;
   programs.emacs = {
     enable = true;
   };
