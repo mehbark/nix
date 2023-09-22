@@ -41,11 +41,17 @@ in
     racket
     clojure
 
+    idris2
+
+    # emacs like this
+    semgrep
+
     discord
     steam
     fzf
 
-    idris2
+    akku
+    # managing with elpas :(
     # emacsPackages.idris2-mode
     # emacsPackages.evil
   ];

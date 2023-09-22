@@ -28,9 +28,9 @@ alias ok='okular'
 alias ko='kitty .'
 alias du="du -h --total"
 
-#exa
-alias ls="exa"
-alias tree="exa --tree -I target"
+#eza
+alias ls="eza"
+alias tree="eza --tree -I target"
 
 # some more ls aliases
 # alias ls='ls --color=always'
@@ -120,6 +120,7 @@ end
 alias xpy '~/Aims/rust/x.py'
 alias sbcl "rlwrap sbcl"
 alias guile "rlwrap guile"
+alias chez "rlwrap chez"
 #alias clj 'clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"} $args}}" -m rebel-readline.main'
 alias csi "rlwrap chicken-csi"
 
@@ -155,7 +156,7 @@ fortune | cowsay
 end
 end
 
-export CHEZSCHEMELIBDIRS="/home/mbk/Aims/chez/thunderchez:/home/mbk/Aims/chez/thunderchez:/home/mbk/Aims/chez/chez-srfi:/home/mbk/Aims/chez/pfds"
+# export CHEZSCHEMELIBDIRS="/home/mbk/Aims/chez/thunderchez:/home/mbk/Aims/chez/thunderchez:/home/mbk/Aims/chez/chez-srfi:/home/mbk/Aims/chez/pfds"
 
 # opam configuration
 source /home/mbk/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true

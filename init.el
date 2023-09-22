@@ -52,7 +52,7 @@
  '(custom-safe-themes
    '("871b064b53235facde040f6bdfa28d03d9f4b966d8ce28fb1725313731a2bcc8" "a5270d86fac30303c5910be7403467662d7601b821af2ff0c4eb181153ebfc0a" "98ef36d4487bf5e816f89b1b1240d45755ec382c7029302f36ca6626faf44bbd" "ba323a013c25b355eb9a0550541573d535831c557674c8d59b9ac6aa720c21d3" "046a2b81d13afddae309930ef85d458c4f5d278a69448e5a5261a5c78598e012" "d445c7b530713eac282ecdeea07a8fa59692c83045bf84dd112dd738c7bcad1d" default))
  '(package-selected-packages
-   '(evil-commentary evil-surround evil-goggles evil paredit org-roam evil-org gruvbox-theme lsp-scheme counsel general all-the-icons-ivy frog-jump-buffer chess rainbow-delimiters which-key)))
+   '(evil-leader geiser-racket macrostep-geiser geiser-chez srfi erc-hl-nicks scheme-complete evil-commentary evil-surround evil-goggles evil paredit org-roam evil-org gruvbox-theme lsp-scheme counsel general all-the-icons-ivy frog-jump-buffer chess rainbow-delimiters which-key)))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
@@ -325,8 +325,8 @@ If the new path's directories does not exist, create them."
 ;; (use-package general
 ;;   :ensure t)
 
-;; (use-package lsp-mode
-;;   :ensure t)
+(use-package lsp-mode
+  :ensure t)
 ;;; Emacs Bedrock
 ;;;
 ;;; Extra config: Base UI enhancements
@@ -517,8 +517,7 @@ If the new path's directories does not exist, create them."
 ;; Magit: best Git client to ever exist
 (use-package magit
   :ensure t
-  :bind (("s-g" . magit-status)
-         ("C-c g" . magit-status)))
+  :bind ())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -562,6 +561,7 @@ If the new path's directories does not exist, create them."
   ;              '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   )
 
+; oorg
   ;;   ;;;;     ;;;;
 ;;  ;; ;;  ;; ;;
 ;;  ;; ;;;;   ;;
@@ -744,6 +744,8 @@ If the new path's directories does not exist, create them."
 ;        org-roam-ui-update-on-save t
 ;        org-roam-ui-open-on-start t))
 
+
+; scm
 ;;;;;; ;;;;;; ;;  ;; ;;;;;; ;;      ;; ;;;;;;
 ;;     ;;     ;;  ;; ;;     ;;;;  ;;;; ;;
 ;;;;;; ;;     ;;;;;; ;;;;   ;;  ;;  ;; ;;;;
@@ -778,17 +780,34 @@ If the new path's directories does not exist, create them."
   (add-hook 'scheme-mode-hook     #'rainbow-delimiters-mode)
   )
 
+; gsr
+(use-package geiser-chez
+  :ensure t
+  :config
+  (setq geiser-active-implementations '(chez))
+  (setq geiser-chez-binary "/usr/bin/chez")
+  (setq geiser-repl-query-on-kill-p nil)
+  )
+
+(use-package macrostep-geiser
+  :ensure t
+  )
+
+; if necessary
+;; (use-package company
+;;   :ensure t)
+
 ;; (use-package lsp-scheme
 ;;   :ensure t
 ;;   :init
-;;   (add-hook 'scheme-mode-hook #'lsp-scheme)
+;;   (add-hook 'scheme-mode-hook #'lsp-scheme-guile)
 ;;   :config
 ;;   )
 
 ;; (use-package scheme-complete
 ;;   :ensure t
 ;;   :config
-;;   (define-key scheme-mode-map "\t" 'scheme-smart-complete))
+;;   )
 
 ;; (use-package lispyville
 ;;   :init
@@ -826,21 +845,22 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+  ;evl
 ;;;;;; ;;      ;; ;;;;;; ;;
 ;;     ;;      ;;   ;;   ;;
 ;;;;     ;;  ;;     ;;   ;;
 ;;       ;;  ;;     ;;   ;;
 ;;;;;;     ;;     ;;;;;; ;;;;;;
 
-; lisp sucks, scheme rulez
+  ; lisp sucks, scheme rulez
 ;; (defun make-file-opener (filename)
 ;;   (lambda ()
 ;;     (interactive (concat "sopen " filename " for editing"))
 ;;     (find-file filename)))
 
 (defun open-init.el ()
-    (interactive)
-    (find-file "~/.emacs.d/init.el"))
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
 (defun open-vim-like.el ()
     (interactive)
     (find-file "~/.emacs.d/extras/vim-like.el"))
@@ -850,11 +870,12 @@ If the new path's directories does not exist, create them."
 ; emacs lisp really is a pain, but even this makes me appreciate the POWA
 (defun scheme-set-up-two-panels-with-repl-and-editor ()
     (interactive)
-    (let ((editor (current-buffer)))
-      (scheme-mode)
-      (run-scheme "chez")
-      (split-window-right)
-      (switch-to-buffer editor)))
+    (geiser-chez)
+    (geiser-mode))
+
+(defun join-libera.chat ()
+  (interactive)
+  ())
 
 (use-package evil
   :ensure t
@@ -864,7 +885,7 @@ If the new path's directories does not exist, create them."
   (setq evil-undo-system 'undo-redo)
 
   ;; Enable this if you want C-u to scroll up, more like pure Vim
-;(setq evil-want-C-u-scroll t)
+  ;(setq evil-want-C-u-scroll t)
 
   :config
   ; >:D
@@ -873,53 +894,87 @@ If the new path's directories does not exist, create them."
   ;; Configuring initial major mode for some modes
   ; (evil-set-initial-state 'vterm-mode 'emacs)
 
-  ; basic convenience
-  (evil-global-set-key 'normal ";w" 'evil-save)
-
-  (evil-global-set-key 'normal ";g" 'magit)
-
-  ; mgmt of modes i want to toggle more often
-  (evil-global-set-key 'normal ";mp" 'paredit-mode)
-
-  ; buffers
-  (evil-global-set-key 'normal ";be" 'counsel-switch-buffer)
-  (evil-global-set-key 'normal ";bn" 'evil-buffer)
-  (evil-global-set-key 'normal ";bs" 'evil-split-buffer)
-
-  ; config mgmt
-  (evil-global-set-key 'normal ";ce" 'open-init.el)
-  ; (evil-global-set-key 'normal ";cev" 'open-vim-like.el)
-  ; (evil-global-set-key 'normal ";ces" 'open-scheme.el)
-  (evil-global-set-key 'normal ";cr"  'restart-emacs)
-
-  ; scheme
-  ; should probably just move these to scheme.el
-  ; si => scheme inferior (avoids conflicts)
-  (evil-global-set-key 'normal ";sir"  'run-scheme)
-  (evil-global-set-key 'normal ";sil"  'scheme-load-file)
-  (evil-global-set-key 'normal ";sii"  'scheme-set-up-two-panels-with-repl-and-editor)
-
-  ; ss => scheme send
-  (evil-global-set-key 'normal ";sss" 'scheme-send-last-sexp)
-  (evil-global-set-key 'normal ";ssr" 'scheme-send-region)
-  (evil-global-set-key 'normal ";ssd" 'scheme-send-definition)
-
-  (evil-global-set-key 'visual ";ssr" 'scheme-send-region)
-
-  ; scheme/lispy-editing
-  (evil-global-set-key 'normal ";swp" 'paredit-wrap-round)
-  (evil-global-set-key 'normal ";swb" 'paredit-wrap-square)
-  (evil-global-set-key 'normal ";swc" 'paredit-wrap-curly)
-  (evil-global-set-key 'normal ";swa" 'paredit-wrap-angled)
-
-  ; gonna just port most of my vscode stuff even though i don't hate the C-<left> stuff
-  (evil-global-set-key 'normal ";sh" 'paredit-backward-slurp-sexp)
-  (evil-global-set-key 'normal ";sl" 'paredit-forward-slurp-sexp)
-  (evil-global-set-key 'normal ";bh" 'paredit-backward-barf-sexp)
-  (evil-global-set-key 'normal ";bl" 'paredit-forward-barf-sexp)
-
-  (evil-global-set-key 'normal ";st" 'paredit-forward-barf-sexp)
+    (evil-global-set-key 'visual " ssr" 'geiser-eval-region)
   )
+
+(use-package evil-leader
+  :ensure t
+  :config
+  (global-evil-leader-mode)
+  (setq evil-leader/leader "<SPC>")
+  (evil-leader/set-key
+    ; very general
+    "w" 'evil-save
+    ; u => unicode
+    "u" 'insert-char
+
+    "g" 'magit
+
+    ; mgmt of modes i want to toggle more often
+    "mp" 'paredit-mode
+    "ms" 'text-scale-adjust
+
+    ; buffers
+    "be" 'counsel-switch-buffer
+    ;; gonna try to stick to C-w commands
+    ;; "bn" 'evil-buffer
+    ;; "bs" 'evil-split-buffer
+    ;; "bv" 'evil-window
+
+    ; config mgmt
+    "ce" 'open-init.el
+    ; "cev" 'open-vim-like.el
+    ; "ces" 'open-scheme.el
+    "cr" 'restart-emacs
+
+    ; scheme
+    ; si => scheme inferior (avoids conflicts)
+    "sir" 'geiser-chez
+    "sil" 'geiser-load-file
+    "sii" 'scheme-set-up-two-panels-with-repl-and-editor
+
+    ; ss => scheme send
+    "sss" 'geiser-eval-last-sexp
+    ;; "ssr" 'geiser-eval-region
+    "ssd" 'geiser-eval-definition
+    ; ssa => scheme send all
+    "ssa" 'geiser-eval-buffer
+
+    ; scheme/lispy-editing
+    "swp" 'paredit-wrap-round
+    "swb" 'paredit-wrap-square
+    "swc" 'paredit-wrap-curly
+    "swa" 'paredit-wrap-angled
+
+    ; gonna just port most of my vscode stuff even though i don't hate the C-<left> stuff
+    "sh" 'paredit-backward-slurp-sexp
+    "sl" 'paredit-forward-slurp-sexp
+    "bh" 'paredit-backward-barf-sexp
+    "bl" 'paredit-forward-barf-sexp
+
+    "st" 'transpose-sexps
+    "s?" 'paredit-convolute-sexps
+
+    "sH" 'backward-sexp
+    "sL" 'forward-sexp
+
+    ; sort of out-of-place feeling 
+    "sb" 'geiser-squarify
+
+    "sd" 'geiser-doc-symbol-at-point
+
+    ; killing is common enough to be worth its own prefix
+    ; non-lisp killing is more than covered by normal vim stuff lol
+    "kh" 'backward-kill-sexp
+    "kl" 'kill-sexp
+
+    ; irc
+    "il" 'erc-tls
+    "ij" 'erc-join-channel
+    "ic" 'erc-switch-to-buffer
+    "is" 'erc-server-select
+    "ia" 'erc-track-switch-buffer
+    ))
 
 (use-package evil-goggles
   :ensure t
@@ -949,3 +1004,24 @@ If the new path's directories does not exist, create them."
   (evil-commentary-mode))
 
 ; hi nix
+; hi .emacs.d
+
+; erc
+(use-package erc-hl-nicks
+  :ensure t)
+
+(erc-log-mode)
+(setq erc-nick-uniquifier "`"
+      erc-nick "mehbark"
+      erc-autojoin-channels-alist '(("Libera.Chat" "#scheme" "#chez" "#lisp" "#commonlisp" "#racket" "#clojure" "#chicken" "#emacs" "#s-expressions"))
+      erc-interpret-mirc-color t
+      erc-sasl-mechanism "plain"
+      erc-sasl-user "mehbark"
+      erc-save-buffer-on-part t
+      erc-save-queries-on-quit nil
+      erc-log-write-after-send t
+      erc-log-write-after-insert t
+      erc-kill-buffer-on-part t
+      erc-kill-server-buffer-on-quit t
+      erc-hide-list '("JOIN" "PART" "QUIT"))
+
