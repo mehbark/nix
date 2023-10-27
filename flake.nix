@@ -28,6 +28,7 @@
         home-manager.useUserPackages = true;
         home-manager.users.mbk = (import ./home.nix) conf;
       }
+      (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
     ];
   in
   {

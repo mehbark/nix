@@ -28,9 +28,9 @@ alias ok='okular'
 alias ko='kitty .'
 alias du="du -h --total"
 
-#eza
-alias ls="eza"
-alias tree="eza --tree -I target"
+#exa
+alias ls="exa"
+alias tree="exa --tree -I target"
 
 # some more ls aliases
 # alias ls='ls --color=always'
