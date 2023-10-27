@@ -111,7 +111,7 @@ in
   users.users.mbk = {
     isNormalUser = true;
     description = "mehbark";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "tty" ];
     hashedPassword = "$6$AgDjrnyBPBpfMpB1$NxjyeU/WxsOXrY7KpnJethtGz28LO.hNARG5J8adIoxDFkBVG/H9wJEiG0A09E7JgguoPxFWmwYIBQLTbknVv1";
   };
 

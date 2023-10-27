@@ -52,7 +52,7 @@
  '(custom-safe-themes
    '("871b064b53235facde040f6bdfa28d03d9f4b966d8ce28fb1725313731a2bcc8" "a5270d86fac30303c5910be7403467662d7601b821af2ff0c4eb181153ebfc0a" "98ef36d4487bf5e816f89b1b1240d45755ec382c7029302f36ca6626faf44bbd" "ba323a013c25b355eb9a0550541573d535831c557674c8d59b9ac6aa720c21d3" "046a2b81d13afddae309930ef85d458c4f5d278a69448e5a5261a5c78598e012" "d445c7b530713eac282ecdeea07a8fa59692c83045bf84dd112dd738c7bcad1d" default))
  '(package-selected-packages
-   '(evil-leader geiser-racket macrostep-geiser geiser-chez srfi erc-hl-nicks scheme-complete evil-commentary evil-surround evil-goggles evil paredit org-roam evil-org gruvbox-theme lsp-scheme counsel general all-the-icons-ivy frog-jump-buffer chess rainbow-delimiters which-key)))
+   '(idris-mode evil-leader geiser-racket macrostep-geiser geiser-chez srfi erc-hl-nicks scheme-complete evil-commentary evil-surround evil-goggles evil paredit org-roam evil-org gruvbox-theme lsp-scheme counsel general all-the-icons-ivy frog-jump-buffer chess rainbow-delimiters which-key)))
 
 ;; create the autosave dir if necessary, since emacs won't.
 (make-directory "~/.emacs.d/autosaves/" t)
