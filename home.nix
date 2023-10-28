@@ -55,6 +55,9 @@ in
     # emacsPackages.idris2-mode
     # emacsPackages.evil
     ripgrep
+    tldr
+    htop
+    lm_sensors
   ];
 
   programs.fish = {
