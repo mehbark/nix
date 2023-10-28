@@ -29,10 +29,16 @@ in
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  boot.enableContainers = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    tmp.useTmpfs = true;
+    initrd.availableKernelModules = ["usbhid" "uas" "usb_storage" "nvme"];
+    #kernelParams = [
+    #];
+    loader.efi.canTouchEfiVariables = true;
+    loader.efi.efiSysMountPoint = "/boot/efi";
+    enableContainers = true;
+  };
 
   networking.hostName = "nix"; # Define your hostname.
 
@@ -41,8 +47,8 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  # networking.networkmanager.enable = true;
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true;
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -69,6 +75,8 @@ in
     layout = "us";
     xkbVariant = "";
 
+    videoDrivers = ["nvidia"];
+
     desktopManager = {
       plasma5.enable = conf.wm == "plasma";
       xterm.enable = false;
@@ -84,6 +92,22 @@ in
     };
     windowManager = {
       i3.enable = conf.wm == "i3";
+    };
+  };
+
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
     };
   };
 
@@ -189,9 +213,6 @@ in
   '' else "";
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

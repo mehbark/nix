@@ -54,6 +54,7 @@ in
     # managing with elpas :(
     # emacsPackages.idris2-mode
     # emacsPackages.evil
+    ripgrep
   ];
 
   programs.fish = {
@@ -164,6 +165,11 @@ in
     enable = true;
     userName = "mehbark";
     userEmail = "terezi@pyrope.net";
+    extraConfig = {
+      safe = {
+      	directory = "*";
+      };
+    };
   };
 
   programs.git.difftastic = {
