@@ -1,4 +1,4 @@
-'''
+''
 {
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "rust-analyzer.checkOnSave.command": "clippy",
@@ -379,4 +379,4 @@
     "editor.suggest.showStatusBar": true,
     "twind.debug": true
 }
-'''
+''
