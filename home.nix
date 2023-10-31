@@ -48,7 +48,11 @@ in
 
     discord
     steam
+    minecraft
+
     fzf
+    kolourpaint
+    audacious
 
     akku
     # managing with elpas :(
@@ -57,7 +61,19 @@ in
     ripgrep
     tldr
     htop
+    pv
+
     lm_sensors
+    libnotify
+
+    hunspell
+    aspell
+    libsForQt5.krunner-symbols
+
+    mpv
+    yt-dlp
+
+    # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ];
 
   programs.fish = {
@@ -253,5 +269,10 @@ in
   services.emacs.client.enable = true;
   programs.emacs = {
     enable = true;
+    # apparently errors in the config matter?
+    # extraConfig = builtins.readFile ./init.el;
   };
+
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 }

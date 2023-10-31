@@ -10,6 +10,7 @@ in
 {
   nix = {
     package = pkgs.nixFlakes;
+    optimise.automatic = true;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -174,6 +175,8 @@ in
      neovim
      wget
      unzip
+     git
+     curl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

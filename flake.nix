@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    fh.url = "https://flakehub.com/f/DeterminateSystems/fh/*.tar.gz";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -13,9 +15,13 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    # for l8r :::;)
+    #homeage.url = "github:jordanisaacs/homeage";
+    #homeage.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixos-generators, hyprland, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixos-generators, hyprland, fh, ... }:
   let
     # :(
     # could do like nix-i3, nix-hyprland but that would be LAME
@@ -28,6 +34,10 @@
         home-manager.useUserPackages = true;
         home-manager.users.mbk = (import ./home.nix) conf;
       }
+      {
+        environment.systemPackages = [ fh.packages.x86_64-linux.default ];
+      }
+      # V evil V
       # (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
     ];
   in
