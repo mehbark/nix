@@ -87,7 +87,7 @@ in
     enableUpdateCheck = false;
     # i prefer to let vscode manage stuff
     mutableExtensionsDir = true;
-    userSettings = builtins.fromJSON (import ./vscode-settings.nix)
+    userSettings = builtins.fromJSON (import ./vscode-settings.nix);
   };
 
   programs.neovim = {
