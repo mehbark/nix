@@ -41,6 +41,10 @@ in
     racket
     clojure
 
+    cargo
+    clippy
+    rustc
+
     idris2
 
     # emacs like this
@@ -48,7 +52,6 @@ in
 
     discord
     steam
-    minecraft
 
     fzf
     kolourpaint
@@ -73,6 +76,8 @@ in
     mpv
     yt-dlp
 
+    # i only need one font :[
+    nerdfonts
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ];
 
