@@ -16,12 +16,24 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
+    pesterchum.url = "git+https://g.pyrope.net/pesterchum";
+    pesterchum.inputs.nixpkgs.follows = "nixpkgs";
+
     # for l8r :::;)
     #homeage.url = "github:jordanisaacs/homeage";
     #homeage.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixos-generators, hyprland, fh, ... }:
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    nixos-generators,
+    hyprland,
+    fh,
+    pesterchum,
+    ... }:
   let
     # :(
     # could do like nix-i3, nix-hyprland but that would be LAME
@@ -32,7 +44,12 @@
       {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.mbk = (import ./home.nix) conf;
+        home-manager.users.mbk = (import ./home.nix) {
+          inherit conf;
+          more-packages = [
+            pesterchum.packages.x86_64-linux.default
+          ];
+        };
       }
       {
         environment.systemPackages = [ fh.packages.x86_64-linux.default ];

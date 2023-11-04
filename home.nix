@@ -1,7 +1,6 @@
-build-conf:
+{ conf, more-packages ? [] }:
 { config, pkgs, ... }:
 let
-  conf = build-conf;
   wm = conf.wm;
 in
 {
@@ -47,7 +46,7 @@ in
 
     idris2
 
-    # emacs like this
+    # emacs likes this
     semgrep
 
     discord
@@ -79,7 +78,7 @@ in
     # i only need one font :[
     nerdfonts
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
-  ];
+  ] ++ more-packages;
 
   programs.fish = {
     enable = true;
@@ -272,11 +271,52 @@ in
     enable = true;
   };
 
-  services.emacs.client.enable = true;
+  # services.emacs.client.enable = true;
   programs.emacs = {
     enable = true;
-    # apparently errors in the config matter?
-    # extraConfig = builtins.readFile ./init.el;
+    package = pkgs.emacs29;
+    extraPackages = epkgs: with epkgs; [
+      which-key
+      emacs
+      all-the-icons-ivy
+      counsel
+      gruvbox-theme
+      lsp-mode
+      avy
+      consult
+      embark
+      embark-consult
+      vertico
+      #vertico-directory
+      marginalia
+      corfu
+      #corfu-popupinfo
+      corfu-terminal
+      kind-icon
+      #eshell
+      orderless
+      magit
+      markdown-mode
+      yaml-mode
+      json-mode
+      eglot
+      org
+      org
+      org-roam
+      paredit
+      rainbow-delimiters
+      geiser-chez
+      macrostep-geiser
+      evil
+      evil-leader
+      evil-goggles
+      evil-surround
+      evil-commentary
+      evil-org
+      erc-hl-nicks
+    ];
+    # apparently errors in the config matter? nvm?
+    extraConfig = builtins.readFile ./init.el;
   };
 
   programs.direnv.enable = true;

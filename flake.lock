@@ -52,6 +52,19 @@
         "url": "https://flakehub.com/f/edolstra/flake-compat/1.0.1.tar.gz"
       }
     },
+    "flake-schemas": {
+      "locked": {
+        "narHash": "sha256-j8SR19V1SRysyJwpOBF4TLuAvAjF5t+gMiboN4gYQDU=",
+        "rev": "764932025c817d4e500a8d2a4d8c565563923d29",
+        "revCount": 29,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/DeterminateSystems/flake-schemas/0.1.2/018b3da8-4cc3-7fbb-8ff7-1588413c53e2/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/DeterminateSystems/flake-schemas/%2A.tar.gz"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -239,6 +252,27 @@
         "type": "github"
       }
     },
+    "pesterchum": {
+      "inputs": {
+        "flake-schemas": "flake-schemas",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1699062698,
+        "narHash": "sha256-ten2EKAXp9vE6vL0MmirduxJGZvTBhIVe6xDoGt0LEY=",
+        "ref": "refs/heads/main",
+        "rev": "bbc1d9e69ea77ceb1163bf20a3d5991397779bd9",
+        "revCount": 1164,
+        "type": "git",
+        "url": "https://g.pyrope.net/pesterchum"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://g.pyrope.net/pesterchum"
+      }
+    },
     "root": {
       "inputs": {
         "fh": "fh",
@@ -246,7 +280,8 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nixos-generators": "nixos-generators",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "pesterchum": "pesterchum"
       }
     },
     "rust-analyzer-src": {

@@ -860,13 +860,13 @@ If the new path's directories does not exist, create them."
 
 (defun open-init.el ()
   (interactive)
-  (find-file "~/.emacs.d/init.el"))
-(defun open-vim-like.el ()
-    (interactive)
-    (find-file "~/.emacs.d/extras/vim-like.el"))
-(defun open-scheme.el ()
-    (interactive)
-    (find-file "~/.emacs.d/extras/scheme.el"))
+  (find-file "/etc/nixos/init.el"))
+;; (defun open-vim-like.el ()
+;;     (interactive)
+;;     (find-file "~/.emacs.d/extras/vim-like.el"))
+;; (defun open-scheme.el ()
+;;     (interactive)
+;;     (find-file "~/.emacs.d/extras/scheme.el"))
 ; emacs lisp really is a pain, but even this makes me appreciate the POWA
 (defun scheme-set-up-two-panels-with-repl-and-editor ()
     (interactive)
@@ -897,56 +897,60 @@ If the new path's directories does not exist, create them."
     (evil-global-set-key 'visual " ssr" 'geiser-eval-region)
   )
 
+(defun use-new-config ()
+  (shell-command "sudo nixos-rebuild switch")
+  (restart-emacs))
+
 (use-package evil-leader
   :ensure t
   :config
   (global-evil-leader-mode)
   (setq evil-leader/leader "<SPC>")
   (evil-leader/set-key
-    ; very general
+					; very general
     "w" 'evil-save
-    ; u => unicode
+					; u => unicode
     "u" 'insert-char
 
     "g" 'magit
 
-    ; mgmt of modes i want to toggle more often
+					; mgmt of modes i want to toggle more often
     "mp" 'paredit-mode
     "ms" 'text-scale-adjust
 
-    ; buffers
+					; buffers
     "be" 'counsel-switch-buffer
     ;; gonna try to stick to C-w commands
     ;; "bn" 'evil-buffer
     ;; "bs" 'evil-split-buffer
     ;; "bv" 'evil-window
 
-    ; config mgmt
+					; config mgmt
     "ce" 'open-init.el
-    ; "cev" 'open-vim-like.el
-    ; "ces" 'open-scheme.el
-    "cr" 'restart-emacs
+					; "cev" 'open-vim-like.el
+					; "ces" 'open-scheme.el
+    "cr" 'use-new-config
 
-    ; scheme
-    ; si => scheme inferior (avoids conflicts)
+					; scheme
+					; si => scheme inferior (avoids conflicts)
     "sir" 'geiser-chez
     "sil" 'geiser-load-file
     "sii" 'scheme-set-up-two-panels-with-repl-and-editor
 
-    ; ss => scheme send
+					; ss => scheme send
     "sss" 'geiser-eval-last-sexp
     ;; "ssr" 'geiser-eval-region
     "ssd" 'geiser-eval-definition
-    ; ssa => scheme send all
+					; ssa => scheme send all
     "ssa" 'geiser-eval-buffer
 
-    ; scheme/lispy-editing
+					; scheme/lispy-editing
     "swp" 'paredit-wrap-round
     "swb" 'paredit-wrap-square
     "swc" 'paredit-wrap-curly
     "swa" 'paredit-wrap-angled
 
-    ; gonna just port most of my vscode stuff even though i don't hate the C-<left> stuff
+					; gonna just port most of my vscode stuff even though i don't hate the C-<left> stuff
     "sh" 'paredit-backward-slurp-sexp
     "sl" 'paredit-forward-slurp-sexp
     "bh" 'paredit-backward-barf-sexp
@@ -958,17 +962,17 @@ If the new path's directories does not exist, create them."
     "sH" 'backward-sexp
     "sL" 'forward-sexp
 
-    ; sort of out-of-place feeling 
+					; sort of out-of-place feeling
     "sb" 'geiser-squarify
 
     "sd" 'geiser-doc-symbol-at-point
 
-    ; killing is common enough to be worth its own prefix
-    ; non-lisp killing is more than covered by normal vim stuff lol
+					; killing is common enough to be worth its own prefix
+					; non-lisp killing is more than covered by normal vim stuff lol
     "kh" 'backward-kill-sexp
     "kl" 'kill-sexp
 
-    ; irc
+					; irc
     "il" 'erc-tls
     "ij" 'erc-join-channel
     "ic" 'erc-switch-to-buffer
