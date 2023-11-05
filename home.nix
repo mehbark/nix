@@ -9,6 +9,10 @@ in
 
   home.packages = with pkgs; [
     firefox
+
+    # ugh
+    ungoogled-chromium
+
     # bsdgames
     # CRITICAL THREE
     fortune
