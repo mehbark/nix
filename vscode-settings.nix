@@ -29,6 +29,7 @@ builtins.fromJSON
   },
   "editor.formatOnSave": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.linkedEditing": true,
   "git.autofetch": true,
   "files.eol": "\n",
   "vim.handleKeys": {

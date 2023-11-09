@@ -11,7 +11,7 @@ in
     firefox
 
     # ugh
-    ungoogled-chromium
+    chromium
 
     # bsdgames
     # CRITICAL THREE
@@ -47,6 +47,8 @@ in
     cargo
     clippy
     rustc
+    rust-analyzer
+    rustfmt
 
     idris2
 
@@ -59,6 +61,7 @@ in
     fzf
     kolourpaint
     audacious
+    audacity
 
     akku
     # managing with elpas :(
