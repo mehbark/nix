@@ -29,7 +29,7 @@ in
     # foliate
   #  thunderbird
     starship
-    exa
+    eza
     dmenu
     xsel
     manix
@@ -57,6 +57,10 @@ in
 
     discord
     steam
+    rare
+    # drm more like pooprm
+    # might as well use a newer version
+    #(itch.override {electron_11 = electron_22;})
 
     fzf
     kolourpaint
@@ -82,8 +86,8 @@ in
     mpv
     yt-dlp
 
-    # i only need one font :[
-    nerdfonts
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    #monaspace
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ] ++ more-packages;
 
@@ -279,8 +283,9 @@ in
   };
 
   # services.emacs.client.enable = true;
+  # not working right now
   programs.emacs = {
-    enable = true;
+    enable = false;
     package = pkgs.emacs29;
     extraPackages = epkgs: with epkgs; [
       which-key

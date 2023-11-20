@@ -15,9 +15,13 @@ in
       experimental-features = nix-command flakes
     '';
     settings = {
-        substituters = ["https://nix-community.cachix.org"];
+        substituters = [
+          "https://nix-community.cachix.org"
+          "https://lean4.cachix.org"
+        ];
         trusted-public-keys = [
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk="
         ];
     };
   };
@@ -96,6 +100,8 @@ in
     };
   };
 
+  services.fstrim.enable = true;
+
   hardware = {
     opengl = {
       enable = true;
@@ -125,11 +131,19 @@ in
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = false;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
+  };
+
+  xdg.mime.defaultApplications = {
+    "text/html" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/http" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/https" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/about" = "org.mozilla.firefox.desktop";
+    "x-scheme-handler/unknown" = "org.mozilla.firefox.desktop";
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -168,6 +182,9 @@ in
 
   # Allow unfree packages (sorry)
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-22.3.27"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -182,10 +199,10 @@ in
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   environment.variables.EDITOR = "nvim";
   environment.variables.SHELL  = "fish";
