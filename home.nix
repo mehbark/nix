@@ -47,7 +47,6 @@ in
     cargo
     clippy
     rustc
-    rust-analyzer
     rustfmt
 
     idris2
@@ -102,7 +101,7 @@ in
     enableUpdateCheck = false;
     # i prefer to let vscode manage stuff
     mutableExtensionsDir = true;
-    userSettings = import ./vscode-settings.nix;
+    userSettings = (import ./vscode-settings.nix) { rust-analyzer = pkgs.rust-analyzer; };
   };
 
   programs.neovim = {
