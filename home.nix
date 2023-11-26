@@ -86,6 +86,10 @@ in
     yt-dlp
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+
+    lmms
+    helm
+
     #monaspace
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ] ++ more-packages;
