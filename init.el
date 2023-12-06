@@ -734,7 +734,7 @@ If the new path's directories does not exist, create them."
     ;; ;;     ;;  ;; ;;     ;;      ;; ;;
 ;;;;;; ;;;;;; ;;  ;; ;;;;;; ;;      ;; ;;;;;;
 
-(setq scheme-program-name "chez")
+(setq scheme-program-name "scheme")
 
 (use-package paredit
   :ensure t
@@ -767,7 +767,7 @@ If the new path's directories does not exist, create them."
   :ensure t
   :config
   (setq geiser-active-implementations '(chez))
-  (setq geiser-chez-binary "/usr/bin/chez")
+  ;(setq geiser-chez-binary "/usr/bin/chez")
   (setq geiser-repl-query-on-kill-p nil)
   )
 
