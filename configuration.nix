@@ -53,6 +53,7 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -195,7 +196,8 @@ in
      git
      curl
      # just too nice
-     busybox
+     # just too many slightly outdated things
+     # busybox
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

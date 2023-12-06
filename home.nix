@@ -27,7 +27,7 @@ in
     # wineWowPackages.stable
     # winetricks
     # foliate
-  #  thunderbird
+    # thunderbird
     starship
     eza
     dmenu
@@ -43,6 +43,10 @@ in
     chez
     racket
     clojure
+    ruby_3_3
+    gcc
+
+    watchexec
 
     cargo
     clippy
@@ -51,11 +55,11 @@ in
 
     idris2
 
-    # emacs likes this
     semgrep
 
     discord
     steam
+    gamemode
     rare
     # drm more like pooprm
     # might as well use a newer version
@@ -63,17 +67,16 @@ in
 
     fzf
     kolourpaint
+    # yeah
     audacious
     audacity
 
     akku
-    # managing with elpas :(
-    # emacsPackages.idris2-mode
-    # emacsPackages.evil
     ripgrep
     tldr
     htop
     pv
+    helix
 
     lm_sensors
     libnotify
@@ -84,6 +87,7 @@ in
 
     mpv
     yt-dlp
+    qbittorrent
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
@@ -288,12 +292,12 @@ in
   # services.emacs.client.enable = true;
   # not working right now
   programs.emacs = {
-    enable = false;
+    enable = true;
     package = pkgs.emacs29;
     extraPackages = epkgs: with epkgs; [
       which-key
-      emacs
       all-the-icons-ivy
+      bind-key
       counsel
       gruvbox-theme
       lsp-mode
@@ -315,7 +319,6 @@ in
       yaml-mode
       json-mode
       eglot
-      org
       org
       org-roam
       paredit

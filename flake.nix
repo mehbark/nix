@@ -33,7 +33,8 @@
     hyprland,
     fh,
     pesterchum,
-    ... }:
+    ...
+  }:
   let
     # :(
     # could do like nix-i3, nix-hyprland but that would be LAME
