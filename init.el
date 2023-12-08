@@ -18,6 +18,7 @@
 ;; Default frame configuration: full screen, good-looking title bar on macOS
 (setq frame-resize-pixelwise t)
 (tool-bar-mode -1)                      ; All these tools are in the menu-bar anyway
+(menu-bar-mode -1)                      ; All these tools are in the M-x anyway
 (setq default-frame-alist '((fullscreen . maximized)
 
                             ;; You can turn off scroll bars by uncommenting these lines:
@@ -1010,3 +1011,7 @@ If the new path's directories does not exist, create them."
       erc-kill-buffer-on-part t
       erc-kill-server-buffer-on-quit t
       erc-hide-list '("JOIN" "PART" "QUIT"))
+
+; critical functionality
+(require 'zone)
+(setq zone-timer (run-with-idle-timer 120 t 'zone))
