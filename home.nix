@@ -45,6 +45,7 @@ in
     clojure
     ruby_3_3
     gcc
+    jq
 
     watchexec
 
@@ -61,6 +62,7 @@ in
     steam
     gamemode
     rare
+    obs-studio
     # drm more like pooprm
     # might as well use a newer version
     #(itch.override {electron_11 = electron_22;})
@@ -94,6 +96,7 @@ in
     lmms
     helm
 
+    obsidian
     #monaspace
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ] ++ more-packages;
