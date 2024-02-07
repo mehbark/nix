@@ -1,3 +1,5 @@
+pkgs:
+''
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Basic settings for quick startup and convenience
@@ -202,9 +204,9 @@ If the new path's directories does not exist, create them."
 (setq mouse-wheel-flip-direction t)
 
 ;; We won't set these, but they're good to know about
-;;
-;; (setq-default indent-tabs-mode nil)
-;; (setq-default tab-width 4)
+;; I will. Thanks!
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; Misc. UI tweaks
 (blink-cursor-mode -1)                                ; Steady cursor
@@ -305,8 +307,8 @@ If the new path's directories does not exist, create them."
 
 ;; (set-fringe-mode 'minimal)
 
-;; (use-package general
-;;   :ensure t)
+(use-package general
+  :ensure t)
 
 (use-package lsp-mode
   :ensure t)
@@ -764,13 +766,13 @@ If the new path's directories does not exist, create them."
   )
 
 ; gsr
-(use-package geiser-chez
-  :ensure t
-  :config
-  (setq geiser-active-implementations '(chez))
+; (use-package geiser-chez
+;   :ensure t
+;   :config
+  (setq geiser-active-implementations '(chez guile))
   ;(setq geiser-chez-binary "/usr/bin/chez")
   (setq geiser-repl-query-on-kill-p nil)
-  )
+  ; )
 
 (use-package macrostep-geiser
   :ensure t
@@ -792,25 +794,22 @@ If the new path's directories does not exist, create them."
 ;;   :config
 ;;   )
 
-;; (use-package lispyville
-;;   :init
-;;   (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook) #'lispyville-mode)
-;;   :config)
+(use-package lispyville
+  :init
+  (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook) #'lispyville-mode)
+  :config)
 
-;; (use-package slime :ensure t
-;;   :init
-;;   (setq slime-contribs                     '(slime-fancy)
-;;         slime-complete-symbol-function     'slime-fuzzy-complete-symbol
-;;         slime-net-coding-system            'utf-8-unix
-;;         slime-lisp-implementations         '((ccl64 ("/usr/local/bin/ccl64"))
-;;                                              (sbcl  ("/usr/local/bin/sbcl"))
-;;                                              (abcl  ("/usr/local/bin/abcl"))
-;;                                              (clisp ("/usr/local/bin/clisp"))
-;;                                              (ccl   ("/usr/local/bin/ccl"))))
-;;   :config
-;;   (setq common-lisp-hyperspec-root         "/usr/local/share/doc/hyperspec/HyperSpec/"
-;;         common-lisp-hyperspec-symbol-table (concat common-lisp-hyperspec-root "Data/Map_Sym.txt")
-;;         common-lisp-hyperspec-issuex-table (concat common-lisp-hyperspec-root "Data/Map_IssX.txt")))
+(use-package slime :ensure t
+  :init
+  (setq slime-contribs                     '(slime-fancy)
+        slime-complete-symbol-function     'slime-fuzzy-complete-symbol
+        slime-net-coding-system            'utf-8-unix
+        slime-lisp-implementations         '((sbcl ("${pkgs.sbcl}/bin/sbcl"))))
+  :config
+  (setq common-lisp-hyperspec-root         "${pkgs.sbclPackages.hyperspec}/docs/"
+        ;common-lisp-hyperspec-symbol-table (concat common-lisp-hyperspec-root "Data/Map_Sym.txt")
+        ;common-lisp-hyperspec-issuex-table (concat common-lisp-hyperspec-root "Data/Map_IssX.txt")
+        ))
 
 ;;; Emacs Bedrock
 ;;;
@@ -851,10 +850,12 @@ If the new path's directories does not exist, create them."
 ;;     (interactive)
 ;;     (find-file "~/.emacs.d/extras/scheme.el"))
 ; emacs lisp really is a pain, but even this makes me appreciate the POWA
-(defun scheme-set-up-two-panels-with-repl-and-editor ()
-    (interactive)
-    (geiser-chez)
-    (geiser-mode))
+; pretty unnecessary lel
+; (defun scheme-set-up-two-panels-with-repl-and-editor ()
+;     (interactive)
+;     (geiser ;needs-arg
+;       )
+;     (geiser-mode))
 
 (defun join-libera.chat ()
   (interactive)
@@ -918,7 +919,8 @@ If the new path's directories does not exist, create them."
 					; si => scheme inferior (avoids conflicts)
     "sir" 'geiser-chez
     "sil" 'geiser-load-file
-    "sii" 'scheme-set-up-two-panels-with-repl-and-editor
+    ; it's funny how you find the thing you really need eventually
+    "sii" 'geiser-repl-switch
 
 					; ss => scheme send
     "sss" 'geiser-eval-last-sexp
@@ -1014,4 +1016,5 @@ If the new path's directories does not exist, create them."
 
 ; critical functionality
 (require 'zone)
-(setq zone-timer (run-with-idle-timer 120 t 'zone))
+;(setq zone-timer (run-with-idle-timer 120 t 'zone))
+''

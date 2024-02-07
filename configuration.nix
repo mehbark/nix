@@ -175,7 +175,8 @@ in
     settings.PasswordAuthentication = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  networking.firewall.allowedTCPPorts = [ 22 8384 22000 ];
+  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
   # services.emacs.enable = true;
   # services.emacs.package = import /home/mbk/.emacs.d { pkgs = pkgs; };
@@ -236,13 +237,21 @@ in
     IdleActionSec=20s
   '' else "";
 
-  # List services that you want to enable:
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  services.syncthing = {
+    enable = true;
+    user = "mbk";
+    dataDir = "/home/mbk/Sync";
+    configDir = "/home/mbk/.config/syncthing";
+    settings.devices = {
+      pixel-6 = { id = "2QJMXQD-OTLK5TM-KNIZUMA-HM3ISPI-7AVY4CG-EOHHYEV-2W5HUNN-DHXLRAJ"; };
+    };
+    settings.folders = {
+      Sync = {
+        path = "/home/mbk/Sync";
+        devices = [ "pixel-6" ];
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

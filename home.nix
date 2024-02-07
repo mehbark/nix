@@ -23,7 +23,11 @@ in
     # lutris
     # mono5
     nethack
-    # chezmoi
+    angband
+    brogue
+    cataclysm-dda
+    # not yet
+    # celeste64
     # wineWowPackages.stable
     # winetricks
     # foliate
@@ -41,6 +45,7 @@ in
     ghc
     sbcl
     chez
+    guile
     racket
     clojure
     ruby_3_3
@@ -62,6 +67,7 @@ in
     steam
     gamemode
     rare
+    slipstream
     obs-studio
     # drm more like pooprm
     # might as well use a newer version
@@ -72,6 +78,8 @@ in
     # yeah
     audacious
     audacity
+    ffmpeg
+    godot_4
 
     akku
     ripgrep
@@ -91,13 +99,14 @@ in
     yt-dlp
     qbittorrent
 
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
 
     lmms
     helm
 
     obsidian
-    #monaspace
+
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    lmmath
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ] ++ more-packages;
 
@@ -196,6 +205,7 @@ in
       elixir-tools-nvim
       #vim-rubocop
       zig-vim
+      vim-elixir
       gruvbox
     ];
     extraConfig = import ./nvim.conf.nix;
@@ -304,6 +314,7 @@ in
       counsel
       gruvbox-theme
       lsp-mode
+      # lean-mode
       avy
       consult
       embark
@@ -327,6 +338,7 @@ in
       paredit
       rainbow-delimiters
       geiser-chez
+      geiser-guile
       macrostep-geiser
       evil
       evil-leader
@@ -335,11 +347,22 @@ in
       evil-commentary
       evil-org
       erc-hl-nicks
+      elixir-mode
+      gcmh
+
+      slime
+      general
+      lispyville
     ];
     # apparently errors in the config matter? nvm?
-    extraConfig = builtins.readFile ./init.el;
+    extraConfig = (import ./init.el.nix) pkgs;
   };
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  # services.syncthing = {
+  #   enable = true;
+  #   tray.enable = true;
+  # };
 }
