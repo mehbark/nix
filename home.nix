@@ -26,6 +26,7 @@ in
     angband
     brogue
     cataclysm-dda
+    openrct2
     # not yet
     # celeste64
     # wineWowPackages.stable
