@@ -66,6 +66,7 @@ in
 
     discord
     steam
+    steam-run
     gamemode
     rare
     slipstream
