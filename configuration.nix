@@ -76,7 +76,7 @@ in
 
   # x11 stuff
   services.xserver = {
-    enable = conf.is-x11;
+    enable = true;
 
     layout = "us";
     xkbVariant = "";
@@ -84,7 +84,7 @@ in
     videoDrivers = ["nvidia"];
 
     desktopManager = {
-      plasma5.enable = conf.wm == "plasma";
+      plasma6.enable = conf.wm == "plasma";
       xterm.enable = false;
       xfce = if conf.wm == "i3" then {
         enable = true;
@@ -100,6 +100,10 @@ in
       i3.enable = conf.wm == "i3";
     };
   };
+
+  # services.xwayland = {
+  #   enable = conf.is-wayland;
+  # };
 
   services.fstrim.enable = true;
 

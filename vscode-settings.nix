@@ -82,7 +82,7 @@
   "editor.suggest.showStatusBar" = true;
   "editor.tabSize" = 4;
   "editor.unicodeHighlight.invisibleCharacters" = false;
-  "editor.wordSeparators" = ''/\()"':,;<>~!@#$$%^&*|+=[]{}`?-'';
+  "editor.wordSeparators" = ''/\()"':.,;<>~!@#$$%^&*|+=[]{}`?-'';
   "editor.wordWrap" = "off";
   "errorLens.excludeBySource" = [ "eslint(eqeqeq)" "ts(2551)" ];
   "files.associations" = {
@@ -110,8 +110,8 @@
   "go.useLanguageServer" = true;
   "gruvboxMaterial.italicComments" = false;
   "haskell.formattingProvider" = "stylish-haskell";
-  "haskell.ghcupExecutablePath" = "/home/mbk/.ghcup/bin/ghcup";
-  "haskell.manageHLS" = "GHCup";
+  # "haskell.ghcupExecutablePath" = "/home/mbk/.ghcup/bin/ghcup";
+  "haskell.manageHLS" = "PATH";
   "haskell.plugin.tactics.config.auto_gas" = 8;
   "idris.numbersOfContinuousTypechecking" = 50;
   "idris.warnPartial" = true;

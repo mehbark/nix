@@ -25,7 +25,7 @@ in
     nethack
     angband
     brogue
-    cataclysm-dda
+    # cataclysm-dda
     openrct2
     # not yet
     # celeste64
@@ -61,6 +61,7 @@ in
     rustfmt
 
     idris2
+    haskell-language-server
 
     semgrep
 
@@ -96,6 +97,7 @@ in
     hunspell
     aspell
     libsForQt5.krunner-symbols
+    libsForQt5.khotkeys
 
     mpv
     yt-dlp
@@ -355,6 +357,11 @@ in
       slime
       general
       lispyville
+
+      haskell-mode
+      lsp-haskell
+
+      direnv
     ];
     # apparently errors in the config matter? nvm?
     extraConfig = (import ./init.el.nix) pkgs;

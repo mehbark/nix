@@ -1017,4 +1017,19 @@ If the new path's directories does not exist, create them."
 ; critical functionality
 (require 'zone)
 ;(setq zone-timer (run-with-idle-timer 120 t 'zone))
+
+; hsk
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((haskell-mode . lsp-deferred))
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-haskell
+  :ensure t)
+
 ''
