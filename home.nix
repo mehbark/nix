@@ -26,6 +26,7 @@ in
     angband
     brogue
     # cataclysm-dda
+    keeperrl
     openrct2
     # not yet
     # celeste64
