@@ -30,8 +30,7 @@ in
     openrct2
     # not yet
     # celeste64
-    # wineWowPackages.stable
-    # winetricks
+    dolphin-emu
     # foliate
     # thunderbird
     starship
@@ -99,6 +98,7 @@ in
     aspell
     libsForQt5.krunner-symbols
     libsForQt5.khotkeys
+    libsForQt5.kio
 
     mpv
     yt-dlp
