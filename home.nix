@@ -27,15 +27,20 @@ in
     brogue
     # cataclysm-dda
     keeperrl
+    # adom
     openrct2
     # not yet
     # celeste64
-    dolphin-emu
+    tetrio-desktop
     # foliate
     # thunderbird
+    prismlauncher
+
     starship
     eza
     dmenu
+    watchexec
+    wl-clipboard
     xsel
     manix
     shellcheck
@@ -47,13 +52,15 @@ in
     sbcl
     chez
     guile
+    gambit
     racket
     clojure
     ruby_3_3
     gcc
     jq
+    file
+    fd
 
-    watchexec
 
     cargo
     clippy
@@ -70,6 +77,7 @@ in
     steam-run
     gamemode
     rare
+    minigalaxy
     slipstream
     obs-studio
     # drm more like pooprm
@@ -229,6 +237,7 @@ in
       safe = {
       	directory = "*";
       };
+      core.autocrlf = false;
     };
   };
 
@@ -344,6 +353,7 @@ in
       rainbow-delimiters
       geiser-chez
       geiser-guile
+      geiser-gambit
       macrostep-geiser
       evil
       evil-leader
@@ -355,14 +365,19 @@ in
       elixir-mode
       gcmh
 
-      slime
+      sly
       general
       lispyville
+
+      clojure-mode
+      cider
 
       haskell-mode
       lsp-haskell
 
       direnv
+
+      esup
     ];
     # apparently errors in the config matter? nvm?
     extraConfig = (import ./init.el.nix) pkgs;

@@ -118,8 +118,8 @@ function filelink
   echo "file://$(realpath $argv)"
 end
 alias xpy '~/Aims/rust/x.py'
-alias sbcl "rlwrap sbcl"
-alias guile "rlwrap guile"
+# alias sbcl "rlwrap sbcl"
+# alias guile "rlwrap guile"
 alias chez "rlwrap chez"
 #alias clj 'clojure -Sdeps "{:deps {com.bhauman/rebel-readline {:mvn/version \"0.1.4\"} $args}}" -m rebel-readline.main'
 alias csi "rlwrap chicken-csi"

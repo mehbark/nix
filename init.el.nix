@@ -748,7 +748,8 @@ If the new path's directories does not exist, create them."
          (lisp-interaction-mode . enable-paredit-mode)
          (scheme-mode . enable-paredit-mode)
          ;; (inferior-scheme-mode . enable-paredit-mode)
-         (slime-repl-mode . enable-paredit-mode)
+         ;(slime-repl-mode . enable-paredit-mode)
+         (sly-repl-mode . enable-paredit-mode)
          (clojure-mode . enable-paredit-mode)
          (clojurescript-mode . enable-paredit-mode)
          (cider-repl-mode . enable-paredit-mode)
@@ -769,7 +770,7 @@ If the new path's directories does not exist, create them."
 ; (use-package geiser-chez
 ;   :ensure t
 ;   :config
-  (setq geiser-active-implementations '(chez guile))
+  (setq geiser-active-implementations '(chez guile gambit))
   ;(setq geiser-chez-binary "/usr/bin/chez")
   (setq geiser-repl-query-on-kill-p nil)
   ; )
@@ -799,17 +800,30 @@ If the new path's directories does not exist, create them."
   (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook scheme-mode-hook) #'lispyville-mode)
   :config)
 
-(use-package slime :ensure t
+;(use-package slime :ensure t
+;  :init
+;  (setq slime-contribs                     '(slime-fancy)
+;        slime-complete-symbol-function     'slime-fuzzy-complete-symbol
+;        slime-net-coding-system            'utf-8-unix
+;        slime-lisp-implementations         '((sbcl ("${pkgs.sbcl}/bin/sbcl"))))
+;  :config
+;  (setq common-lisp-hyperspec-root         "${pkgs.sbclPackages.hyperspec}/docs/"
+;        ;common-lisp-hyperspec-symbol-table (concat common-lisp-hyperspec-root "Data/Map_Sym.txt")
+;        ;common-lisp-hyperspec-issuex-table (concat common-lisp-hyperspec-root "Data/Map_IssX.txt")
+;        ))
+
+(use-package sly :ensure t
   :init
-  (setq slime-contribs                     '(slime-fancy)
-        slime-complete-symbol-function     'slime-fuzzy-complete-symbol
-        slime-net-coding-system            'utf-8-unix
-        slime-lisp-implementations         '((sbcl ("${pkgs.sbcl}/bin/sbcl"))))
+  (setq inferior-lisp-program "${pkgs.sbcl}/bin/sbcl")
   :config
   (setq common-lisp-hyperspec-root         "${pkgs.sbclPackages.hyperspec}/docs/"
         ;common-lisp-hyperspec-symbol-table (concat common-lisp-hyperspec-root "Data/Map_Sym.txt")
         ;common-lisp-hyperspec-issuex-table (concat common-lisp-hyperspec-root "Data/Map_IssX.txt")
-        ))
+        )
+  ;(define-key sly-prefix-map (kbd "<down>") 'sly-next-completion)
+  )
+
+(add-hook 'sly-db-hook 'turn-off-evil-mode)
 
 ;;; Emacs Bedrock
 ;;;
@@ -891,51 +905,51 @@ If the new path's directories does not exist, create them."
   (global-evil-leader-mode)
   (setq evil-leader/leader "<SPC>")
   (evil-leader/set-key
-					; very general
+    ; very general
     "w" 'evil-save
-					; u => unicode
+    ; u => unicode
     "u" 'insert-char
 
     "g" 'magit
 
-					; mgmt of modes i want to toggle more often
+    ; mgmt of modes i want to toggle more often
     "mp" 'paredit-mode
     "ms" 'text-scale-adjust
 
-					; buffers
+    ; buffers
     "be" 'counsel-switch-buffer
     ;; gonna try to stick to C-w commands
     ;; "bn" 'evil-buffer
     ;; "bs" 'evil-split-buffer
     ;; "bv" 'evil-window
 
-					; config mgmt
+    ; config mgmt
     "ce" 'open-init.el
-					; "cev" 'open-vim-like.el
-					; "ces" 'open-scheme.el
+    ; "cev" 'open-vim-like.el
+    ; "ces" 'open-scheme.el
     "cr" 'use-new-config
 
-					; scheme
-					; si => scheme inferior (avoids conflicts)
+    ; scheme
+    ; si => scheme inferior (avoids conflicts)
     "sir" 'geiser-chez
     "sil" 'geiser-load-file
     ; it's funny how you find the thing you really need eventually
     "sii" 'geiser-repl-switch
 
-					; ss => scheme send
+    ; ss => scheme send
     "sss" 'geiser-eval-last-sexp
     ;; "ssr" 'geiser-eval-region
     "ssd" 'geiser-eval-definition
-					; ssa => scheme send all
+    ; ssa => scheme send all
     "ssa" 'geiser-eval-buffer
 
-					; scheme/lispy-editing
+    ; scheme/lispy-editing
     "swp" 'paredit-wrap-round
     "swb" 'paredit-wrap-square
     "swc" 'paredit-wrap-curly
     "swa" 'paredit-wrap-angled
 
-					; gonna just port most of my vscode stuff even though i don't hate the C-<left> stuff
+    ; gonna just port most of my vscode stuff even though i don't hate the C-<left> stuff
     "sh" 'paredit-backward-slurp-sexp
     "sl" 'paredit-forward-slurp-sexp
     "bh" 'paredit-backward-barf-sexp
@@ -947,22 +961,43 @@ If the new path's directories does not exist, create them."
     "sH" 'backward-sexp
     "sL" 'forward-sexp
 
-					; sort of out-of-place feeling
+    ; sort of out-of-place feeling
     "sb" 'geiser-squarify
 
     "sd" 'geiser-doc-symbol-at-point
 
-					; killing is common enough to be worth its own prefix
-					; non-lisp killing is more than covered by normal vim stuff lol
+    ; killing is common enough to be worth its own prefix
+    ; non-lisp killing is more than covered by normal vim stuff lol
     "kh" 'backward-kill-sexp
     "kl" 'kill-sexp
 
-					; irc
+    ; irc
     "il" 'erc-tls
     "ij" 'erc-join-channel
     "ic" 'erc-switch-to-buffer
     "is" 'erc-server-select
     "ia" 'erc-track-switch-buffer
+
+    ;clojure
+    "cii" 'cider-jack-in
+    "cim" 'cider-inspire-me
+
+    ; cs => clojure send
+    ; css lol
+    "css" 'cider-eval-last-sexp
+    "csa" 'cider-eval-buffer
+    "csd" 'cider-eval-defun-at-point
+    "csn" 'cider-ns-reload
+
+    ; cf => clojure fix?
+    "cfl" 'clojure-move-to-let
+    "cfp" 'clojure-cyle-privacy
+    "cfi" 'clojure-toggle-ignore
+    "cff" 'clojure-thread-first-all
+    "cfl" 'clojure-thread-last-all
+
+    ; cd => clojure doc
+    "cd" 'cider-doc
     ))
 
 (use-package evil-goggles
@@ -1032,4 +1067,7 @@ If the new path's directories does not exist, create them."
 (use-package lsp-haskell
   :ensure t)
 
+; yay
+(setq confirm-kill-processes nil)
+(setq auto-save-interval 100)
 ''
