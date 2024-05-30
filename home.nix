@@ -44,6 +44,11 @@ in
     xsel
     manix
     shellcheck
+    jq
+    file
+    fd
+    semgrep
+    pandoc
 
     rlwrap
     # i like having easy access to a lot of repls
@@ -56,11 +61,8 @@ in
     racket
     clojure
     ruby_3_3
+    julia
     gcc
-    jq
-    file
-    fd
-
 
     cargo
     clippy
@@ -69,8 +71,7 @@ in
 
     idris2
     haskell-language-server
-
-    semgrep
+    typst
 
     discord
     steam
@@ -90,7 +91,11 @@ in
     audacious
     audacity
     ffmpeg
+    libjxl
+    exiftool
+
     godot_4
+    blender
 
     akku
     ripgrep
@@ -98,6 +103,8 @@ in
     htop
     pv
     helix
+    numbat
+    hyperfine
 
     lm_sensors
     libnotify
@@ -112,7 +119,6 @@ in
     yt-dlp
     qbittorrent
 
-
     lmms
     helm
 
@@ -120,6 +126,7 @@ in
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     lmmath
+    julia-mono
     # glow and gum are a good example of something that should really be in a flake.nix or whatever
   ] ++ more-packages;
 

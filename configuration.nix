@@ -136,7 +136,7 @@ in
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    jack.enable = false;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -190,6 +190,11 @@ in
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-22.3.27"
+  ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      blender = prev.blender.override { cudaSupport = true; };
+    })
   ];
 
   # List packages installed in system profile. To search, run:
@@ -256,6 +261,10 @@ in
       };
     };
   };
+
+  services.udev.extraRules = ''
+  KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
