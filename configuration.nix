@@ -78,27 +78,27 @@ in
   services.xserver = {
     enable = true;
 
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
 
     videoDrivers = ["nvidia"];
 
     desktopManager = {
-      plasma6.enable = conf.wm == "plasma";
       xterm.enable = false;
-      xfce = if conf.wm == "i3" then {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      } else {};
     };
-    displayManager = {
-      sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
-      defaultSession = if conf.wm == "i3" then "xfce+i3" else null;
-    };
+
     windowManager = {
       i3.enable = conf.wm == "i3";
     };
+  };
+
+  services.desktopManager = {
+    plasma6.enable = conf.wm == "plasma";
+  };
+
+  services.displayManager = {
+    sddm.enable = conf.wm == "plasma" || conf.wm == "xmonad";
+    defaultSession = if conf.wm == "i3" then "xfce+i3" else null;
   };
 
   # services.xwayland = {
@@ -137,6 +137,14 @@ in
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
+    extraConfig.pipewire."92-low-latency" = {
+      context.properties = {
+        default.clock.rate = 48000;
+        default.clock.quantum = 32;
+        default.clock.min-quantum = 32;
+        default.clock.max-quantum = 32;
+      };
+    };
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)

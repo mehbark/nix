@@ -18,8 +18,6 @@ in
     fortune
     cowsay
     ponysay
-    lispPackages.trivia
-    lispPackages.quicklisp
     # lutris
     # mono5
     nethack
@@ -62,6 +60,7 @@ in
     clojure
     ruby_3_3
     julia
+    lua
     gcc
 
     cargo
@@ -178,7 +177,7 @@ in
 
       vim-bufkill
 
-      suda-vim
+      vim-suda
 
       # navigation
       nerdtree
