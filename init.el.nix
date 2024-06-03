@@ -880,7 +880,7 @@ If the new path's directories does not exist, create them."
 
   :init
   (setq evil-respect-visual-line-mode t)
-  (setq evil-undo-system 'undo-redo)
+  (evil-set-undo-system 'undo-redo)
 
   ;; Enable this if you want C-u to scroll up, more like pure Vim
   ;(setq evil-want-C-u-scroll t)

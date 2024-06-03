@@ -335,6 +335,7 @@
   "window.restoreWindows" = "none";
   "window.titleBarStyle" = "custom";
   "workbench.colorTheme" = "One Dark Pro Darker";
+  "workbench.preferredDarkColorTheme" = "One Dark Pro Darker";
   "workbench.editor.enablePreview" = false;
   "workbench.editor.enablePreviewFromQuickOpen" = false;
   "workbench.editorAssociations" = { "*.jpg" = "imagePreview.previewEditor"; };
