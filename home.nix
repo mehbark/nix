@@ -1,4 +1,4 @@
-{ conf, more-packages ? [] }:
+{ conf, more-packages ? [], leanpkgs }:
 { config, pkgs, ... }:
 let
   wm = conf.wm;
@@ -52,6 +52,8 @@ in
     # i like having easy access to a lot of repls
     deno
     ghc
+    ghcid
+    cabal-install
     sbcl
     chez
     guile
@@ -69,6 +71,9 @@ in
     rustfmt
 
     idris2
+    # might as well use it consistently
+    leanpkgs.lean-all
+    # (builtins.foldl' (a: b: "${a} ${b}") "" (builtins.attrNames leanpkgs))
     haskell-language-server
     typst
 
@@ -326,15 +331,15 @@ in
   # not working right now
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29;
+    package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: with epkgs; [
       which-key
       all-the-icons-ivy
       bind-key
       counsel
       gruvbox-theme
+      leanpkgs.lean4-mode
       lsp-mode
-      # lean-mode
       avy
       consult
       embark
@@ -379,7 +384,6 @@ in
       cider
 
       haskell-mode
-      lsp-haskell
 
       direnv
 

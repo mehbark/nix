@@ -978,7 +978,7 @@ If the new path's directories does not exist, create them."
     "is" 'erc-server-select
     "ia" 'erc-track-switch-buffer
 
-    ;clojure
+    ; clojure
     "cii" 'cider-jack-in
     "cim" 'cider-inspire-me
 
@@ -998,6 +998,9 @@ If the new path's directories does not exist, create them."
 
     ; cd => clojure doc
     "cd" 'cider-doc
+
+    ; haskell
+    "hg" 'haskell-hoogle
     ))
 
 (use-package evil-goggles
@@ -1061,11 +1064,7 @@ If the new path's directories does not exist, create them."
 
 (use-package lsp-mode
   :ensure t
-  :hook ((haskell-mode . lsp-deferred))
   :commands (lsp lsp-deferred))
-
-(use-package lsp-haskell
-  :ensure t)
 
 ; yay
 (setq confirm-kill-processes nil)

@@ -113,6 +113,9 @@
   # "haskell.ghcupExecutablePath" = "/home/mbk/.ghcup/bin/ghcup";
   "haskell.manageHLS" = "PATH";
   "haskell.plugin.tactics.config.auto_gas" = 8;
+  "haskell.plugin.ghcide-code-actions-type-signatures.globalOn" = true;
+  "haskell.plugin.changeTypeSignature.globalOn" = true;
+  "haskell.plugin.ghcide-type-lenses.config.mode" = "exported";
   "idris.numbersOfContinuousTypechecking" = 50;
   "idris.warnPartial" = true;
   "latex-workshop.view.pdf.viewer" = "tab";
