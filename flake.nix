@@ -22,6 +22,9 @@
     leanpkgs.url = "github:leanprover/lean4";
     leanpkgs.inputs.nixpkgs.follows = "nixpkgs";
 
+    zig.url = "github:mitchellh/zig-overlay";
+    zig.inputs.nixpkgs.follows = "nixpkgs";
+
     # for l8r :::;)
     #homeage.url = "github:jordanisaacs/homeage";
     #homeage.inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +40,7 @@
     fh,
     pesterchum,
     leanpkgs,
+    zig,
     ...
   }:
   let
@@ -54,6 +58,7 @@
           leanpkgs = leanpkgs.packages.x86_64-linux;
           more-packages = [
             pesterchum.packages.x86_64-linux.default
+            zig.packages.x86_64-linux."0.13.0"
           ];
         };
       }

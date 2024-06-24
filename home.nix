@@ -45,6 +45,7 @@ in
     jq
     file
     fd
+    zip
     semgrep
     pandoc
 
@@ -64,6 +65,7 @@ in
     julia
     lua
     gcc
+    zls
 
     cargo
     clippy
@@ -333,13 +335,21 @@ in
     enable = true;
     package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: with epkgs; [
+      lsp-mode
+      leanpkgs.lean4-mode
+      markdown-mode
+      yaml-mode
+      json-mode
+      elixir-mode
+      clojure-mode
+      haskell-mode
+      zig-mode
+
       which-key
       all-the-icons-ivy
       bind-key
       counsel
       gruvbox-theme
-      leanpkgs.lean4-mode
-      lsp-mode
       avy
       consult
       embark
@@ -354,9 +364,6 @@ in
       #eshell
       orderless
       magit
-      markdown-mode
-      yaml-mode
-      json-mode
       eglot
       org
       org-roam
@@ -373,17 +380,13 @@ in
       evil-commentary
       evil-org
       erc-hl-nicks
-      elixir-mode
       gcmh
 
       sly
       general
       lispyville
 
-      clojure-mode
       cider
-
-      haskell-mode
 
       direnv
 
