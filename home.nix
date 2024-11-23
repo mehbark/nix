@@ -1,4 +1,4 @@
-{ conf, more-packages ? [], leanpkgs }:
+{ conf, more-packages ? [] }:
 { config, pkgs, ... }:
 let
   wm = conf.wm;
@@ -74,7 +74,6 @@ in
 
     idris2
     # might as well use it consistently
-    leanpkgs.lean-all
     # (builtins.foldl' (a: b: "${a} ${b}") "" (builtins.attrNames leanpkgs))
     haskell-language-server
     typst
@@ -336,7 +335,6 @@ in
     package = pkgs.emacs29-pgtk;
     extraPackages = epkgs: with epkgs; [
       lsp-mode
-      leanpkgs.lean4-mode
       markdown-mode
       yaml-mode
       json-mode
