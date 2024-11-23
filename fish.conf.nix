@@ -132,7 +132,7 @@ alias zbt "zig build test"
 # nix
 alias nrb "sudo nixos-rebuild"
 #### END ALIASES ####
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH:$HOME/.ghcup/bin:$HOME/.cabal/bin:$HOME/hs/bin:$HOME/.cargo/bin:$HOME/.deno/bin:$HOME/Aims/curlfire"
+export PATH="/etc/profiles/per-user/clark/bin:/run/current-system/sw/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH:$HOME/.ghcup/bin:$HOME/.cabal/bin:$HOME/hs/bin:$HOME/.cargo/bin:$HOME/.deno/bin:$HOME/Aims/curlfire:$HOME/.npm-global/bin"
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # setopt autocd

@@ -22,12 +22,12 @@
     leanpkgs.url = "github:leanprover/lean4";
     leanpkgs.inputs.nixpkgs.follows = "nixpkgs";
 
-    zig.url = "github:mitchellh/zig-overlay";
-    zig.inputs.nixpkgs.follows = "nixpkgs";
-
     # for l8r :::;)
     #homeage.url = "github:jordanisaacs/homeage";
     #homeage.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{
@@ -40,7 +40,7 @@
     fh,
     pesterchum,
     leanpkgs,
-    zig,
+    nix-darwin,
     ...
   }:
   let
@@ -58,7 +58,6 @@
           leanpkgs = leanpkgs.packages.x86_64-linux;
           more-packages = [
             pesterchum.packages.x86_64-linux.default
-            zig.packages.x86_64-linux."0.13.0"
           ];
         };
       }
@@ -70,8 +69,7 @@
     ];
   in
   {
-    nixosConfigurations =
-    {
+    nixosConfigurations = {
       nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         inherit modules;
@@ -86,6 +84,21 @@
         hyprland.homeManagerModules.default
         {wayland.windowManager.hyprland.enable = true;}
       ] else modules;
+    };
+
+    darwinConfigurations = {
+      mac = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./darwin.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.clark = import ./home.nix {inherit conf; darwin = true;};
+          }
+        ];
+        specialArgs = { inherit inputs; };
+      };
     };
 
     # meh, doesn't rly work
