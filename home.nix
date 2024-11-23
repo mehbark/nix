@@ -1,18 +1,12 @@
-{ conf, more-packages ? [] }:
+{ conf, more-packages ? [], leanpkgs ? false, darwin ? false }:
 { config, pkgs, ... }:
 let
   wm = conf.wm;
 in
 {
-  /* The home.stateVersion option does not have a default and must be set */
   home.stateVersion = "22.05";
 
   home.packages = with pkgs; [
-    firefox
-
-    # ugh
-    chromium
-
     # bsdgames
     # CRITICAL THREE
     fortune
@@ -22,17 +16,11 @@ in
     # mono5
     nethack
     angband
-    brogue
+    brogue-ce
     # cataclysm-dda
-    keeperrl
     # adom
-    openrct2
     # not yet
     # celeste64
-    tetrio-desktop
-    # foliate
-    # thunderbird
-    prismlauncher
 
     starship
     eza
@@ -59,18 +47,18 @@ in
     chez
     guile
     gambit
-    racket
     clojure
     ruby_3_3
-    julia
+    ruby-lsp
+    rubocop
     lua
-    gcc
+    maxima
     zls
 
-    cargo
-    clippy
-    rustc
-    rustfmt
+    # ocaml
+    # ocamlPackages.utop
+    # ocamlPackages.ocaml-lsp
+    # ocamlPackages.ocamlformat
 
     idris2
     # might as well use it consistently
@@ -78,29 +66,17 @@ in
     haskell-language-server
     typst
 
-    discord
-    steam
-    steam-run
-    gamemode
-    rare
-    minigalaxy
     slipstream
-    obs-studio
     # drm more like pooprm
     # might as well use a newer version
     #(itch.override {electron_11 = electron_22;})
 
     fzf
-    kolourpaint
     # yeah
-    audacious
     audacity
     ffmpeg
     libjxl
     exiftool
-
-    godot_4
-    blender
 
     akku
     ripgrep
@@ -108,32 +84,73 @@ in
     htop
     pv
     helix
-    numbat
+    # numbat
     hyperfine
 
-    lm_sensors
     libnotify
 
     hunspell
     aspell
-    libsForQt5.krunner-symbols
-    libsForQt5.khotkeys
-    libsForQt5.kio
 
-    mpv
     yt-dlp
     qbittorrent
-
-    lmms
-    helm
 
     obsidian
 
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     lmmath
     julia-mono
-    # glow and gum are a good example of something that should really be in a flake.nix or whatever
-  ] ++ more-packages;
+  ] ++ more-packages
+    ++ (if leanpkgs then [leanpkgs.lean4-mode leanpkgs.lean-all] else [])
+    ++ (if darwin then [
+         m-cli
+         libiconvReal
+         # (racket-minimal.overrideAttrs (finalAttrs: previousAttrs: {
+         # configureFlags = [
+         # "--enable-${previousAttrs.shared}"
+         # "--enable-lt=${pkgs.libtool}/bin/libtool"
+         # "--enable-macprefix"
+         # ];
+         # }))
+         pkg-config
+         rustup
+         podman
+        ] else [
+         racket
+         mpv
+         gcc
+         julia
+         godot_4
+         blender
+         firefox
+         chromium
+         steam
+         steam-run
+         gamemode
+         rare
+         minigalaxy
+         openrct2
+         obs-studio
+         kolourpaint
+         audacious
+         lm_sensors
+         libsForQt5.krunner-symbols
+         libsForQt5.khotkeys
+         libsForQt5.kio
+         lmms
+         helm
+         cargo
+         clippy
+         rustc
+         rustfmt
+       ]);
+
+  home.file = {
+    ".config/kitty/kitty.app.png".source = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/samholmes/whiskers/main/whiskers.png";
+      hash = "sha256-By6sRGNyK5Myk608crIO2vrnixZ0dJjoW26Y1I23Dto=";
+    };
+  };
 
   programs.fish = {
     enable = true;
@@ -141,12 +158,14 @@ in
     shellInit = import ./fish.conf.nix;
   };
 
+  programs.zsh.enable = true;
+
   programs.vscode = {
     enable = true;
     enableUpdateCheck = false;
     # i prefer to let vscode manage stuff
     mutableExtensionsDir = true;
-    userSettings = (import ./vscode-settings.nix) { rust-analyzer = pkgs.rust-analyzer; };
+    userSettings = (import ./vscode-settings.nix) { inherit pkgs; };
   };
 
   programs.neovim = {
@@ -250,6 +269,7 @@ in
       	directory = "*";
       };
       core.autocrlf = false;
+      init.defaultBranch = "main";
     };
   };
 
@@ -343,6 +363,8 @@ in
       haskell-mode
       zig-mode
 
+      quack
+
       which-key
       all-the-icons-ivy
       bind-key
@@ -370,6 +392,7 @@ in
       geiser-chez
       geiser-guile
       geiser-gambit
+      geiser-racket
       macrostep-geiser
       evil
       evil-leader
@@ -389,6 +412,8 @@ in
       direnv
 
       esup
+
+      maxima
     ];
     # apparently errors in the config matter? nvm?
     extraConfig = (import ./init.el.nix) pkgs;
@@ -397,8 +422,10 @@ in
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
-  # services.syncthing = {
-  #   enable = true;
-  #   tray.enable = true;
-  # };
+  programs.home-manager.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    tray.enable = !darwin;
+  };
 }

@@ -1,15 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-build-conf:
 { config, pkgs, ... }:
 let
     conf = build-conf;
 in
 {
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     optimise.automatic = true;
     extraOptions = ''
       experimental-features = nix-command flakes

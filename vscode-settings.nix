@@ -1,4 +1,4 @@
-{ rust-analyzer }:
+{ pkgs }:
 {
   "C_Cpp.clang_format_fallbackStyle" = "WebKit";
   "[c]" = {
@@ -128,7 +128,7 @@
   "ruby.codeCompletion" = "rcodetools";
   "ruby.format" = "prettier";
   "ruby.intellisense" = "rubyLocate";
-  "rust-analyzer.server.path" = "${rust-analyzer}/bin/rust-analyzer";
+  "rust-analyzer.server.path" = "${pkgs.rust-analyzer}/bin/rust-analyzer";
   "rust-analyzer.checkOnSave.command" = "clippy";
   "rust-analyzer.checkOnSave.extraArgs" = [ "--" "-W" "clippy::pedantic" ];
   "rust-analyzer.debug.openDebugPane" = true;
@@ -168,7 +168,7 @@
   "vim.easymotion" = true;
   "vim.handleKeys" = { "<C-t>" = false; };
   "vim.highlightedyank.enable" = true;
-  "vim.leader" = ";";
+  "vim.leader" = " ";
   "vim.normalModeKeyBindings" = [
     {
       after = [ "g" "j" ];
@@ -350,4 +350,5 @@
   "zig.zls.enabled" = true;
   "zig.zls.path" =
     "/home/mbk/.config/Code/User/globalStorage/ziglang.vscode-zig/zls_install/zls";
+  "purescript.exportsCodeLens" = false;
 }

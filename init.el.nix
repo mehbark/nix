@@ -770,7 +770,7 @@ If the new path's directories does not exist, create them."
 ; (use-package geiser-chez
 ;   :ensure t
 ;   :config
-  (setq geiser-active-implementations '(chez guile gambit))
+  (setq geiser-active-implementations '(chez guile gambit racket))
   ;(setq geiser-chez-binary "/usr/bin/chez")
   (setq geiser-repl-query-on-kill-p nil)
   ; )
@@ -824,16 +824,6 @@ If the new path's directories does not exist, create them."
   )
 
 (add-hook 'sly-db-hook 'turn-off-evil-mode)
-
-;;; Emacs Bedrock
-;;;
-;;; Extra config: Vim emulation
-
-;;; Usage: Append or require this file from init.el for bindings in Emacs.
-
-;;; Contents:
-;;;
-;;;  - Core Packages
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -1069,4 +1059,13 @@ If the new path's directories does not exist, create them."
 ; yay
 (setq confirm-kill-processes nil)
 (setq auto-save-interval 100)
+
+(use-package maxima
+  :init
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
+	  maxima-display-maxima-buffer nil)
+  (add-to-list 'auto-mode-alist
+		 (cons "\\.mac\\'" 'maxima-mode))
+  (add-to-list 'interpreter-mode-alist
+		 (cons "maxima" 'maxima-mode)))
 ''

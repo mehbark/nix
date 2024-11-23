@@ -22,6 +22,9 @@
     # for l8r :::;)
     #homeage.url = "github:jordanisaacs/homeage";
     #homeage.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{
@@ -60,8 +63,7 @@
     ];
   in
   {
-    nixosConfigurations =
-    {
+    nixosConfigurations = {
       nix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         inherit modules;
@@ -76,6 +78,21 @@
         hyprland.homeManagerModules.default
         {wayland.windowManager.hyprland.enable = true;}
       ] else modules;
+    };
+
+    darwinConfigurations = {
+      mac = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./darwin.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.clark = import ./home.nix {inherit conf; darwin = true;};
+          }
+        ];
+        specialArgs = { inherit inputs; };
+      };
     };
 
     # meh, doesn't rly work
