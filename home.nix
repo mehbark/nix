@@ -1,4 +1,4 @@
-{ conf, more-packages ? [], leanpkgs ? false, darwin ? false }:
+{ conf, more-packages ? [], darwin ? false }:
 { config, pkgs, ... }:
 let
   wm = conf.wm;
@@ -62,7 +62,6 @@ in
 
     idris2
     # might as well use it consistently
-    # (builtins.foldl' (a: b: "${a} ${b}") "" (builtins.attrNames leanpkgs))
     haskell-language-server
     typst
 
@@ -101,7 +100,6 @@ in
     lmmath
     julia-mono
   ] ++ more-packages
-    ++ (if leanpkgs then [leanpkgs.lean4-mode leanpkgs.lean-all] else [])
     ++ (if darwin then [
          m-cli
          libiconvReal

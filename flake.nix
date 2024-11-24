@@ -36,6 +36,7 @@
     hyprland,
     fh,
     pesterchum,
+    nix-darwin,
     ...
   }:
   let
