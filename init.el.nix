@@ -144,9 +144,6 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Show the help buffer after startup
-; (add-hook 'after-init-hook 'help-quick)
-
 ;; which-key: shows a popup of available keybindings when typing a long key
 ;; sequence (e.g. C-x ...)
 (use-package which-key
@@ -814,7 +811,8 @@ If the new path's directories does not exist, create them."
 
 (use-package sly :ensure t
   :init
-  (setq inferior-lisp-program "${pkgs.sbcl}/bin/sbcl")
+  (setq inferior-lisp-program "${pkgs.sbcl}/bin/sbcl"
+        sly-symbol-completion-mode nil)
   :config
   (setq common-lisp-hyperspec-root         "${pkgs.sbclPackages.hyperspec}/docs/"
         ;common-lisp-hyperspec-symbol-table (concat common-lisp-hyperspec-root "Data/Map_Sym.txt")
@@ -889,6 +887,11 @@ If the new path's directories does not exist, create them."
   (shell-command "sudo nixos-rebuild switch")
   (restart-emacs))
 
+(defun geiser-or-sly-doc ()
+  (if sly-mode
+    (sly-documentation)
+    (geiser-doc-symbol-at-point)))
+
 (use-package evil-leader
   :ensure t
   :config
@@ -925,6 +928,8 @@ If the new path's directories does not exist, create them."
     "sil" 'geiser-load-file
     ; it's funny how you find the thing you really need eventually
     "sii" 'geiser-repl-switch
+    ; (not scheme, sorry)
+    "sis" 'sly
 
     ; ss => scheme send
     "sss" 'geiser-eval-last-sexp
@@ -948,13 +953,10 @@ If the new path's directories does not exist, create them."
     "st" 'transpose-sexps
     "s?" 'paredit-convolute-sexps
 
-    "sH" 'backward-sexp
-    "sL" 'forward-sexp
+    "sk" 'backward-sexp
+    "sj" 'forward-sexp
 
-    ; sort of out-of-place feeling
-    "sb" 'geiser-squarify
-
-    "sd" 'geiser-doc-symbol-at-point
+    "sd" 'geiser-or-sly-doc
 
     ; killing is common enough to be worth its own prefix
     ; non-lisp killing is more than covered by normal vim stuff lol
