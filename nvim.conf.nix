@@ -11,7 +11,7 @@ let g:ConqueGdb_GdbExe = 'arm-none-eabi-gdb'
 
 
 "===== Code Completion ====="
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 " tab to select
 " and don't hijack my enter key
@@ -70,9 +70,9 @@ filetype plugin on
 au BufRead,BufNewFile *.ml,*.mli compiler ocaml
 
 " different color schemes depending on the file type
+set t_Co=256
 syntax enable
-"let g:rehash256 = 1
-colorscheme gruvbox
+" colorscheme gruvbox
 
 
 "===== NERDTree ====="

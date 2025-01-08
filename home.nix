@@ -83,7 +83,7 @@ in
     htop
     pv
     helix
-    # numbat
+    numbat
     hyperfine
 
     libnotify
@@ -96,7 +96,7 @@ in
 
     obsidian
 
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
     lmmath
     julia-mono
   ] ++ more-packages
@@ -135,7 +135,6 @@ in
          libsForQt5.krunner-symbols
          libsForQt5.khotkeys
          libsForQt5.kio
-         lmms
          helm
          cargo
          clippy
@@ -248,6 +247,7 @@ in
       #vim-rubocop
       zig-vim
       vim-elixir
+
       gruvbox
     ];
     extraConfig = import ./nvim.conf.nix;
@@ -346,8 +346,12 @@ in
     enable = true;
   };
 
-  # services.emacs.client.enable = true;
-  # not working right now
+  # services.emacs = {
+  #   enable = true;
+  #   client.enable = true;
+  #   startWithUserSession = true;
+  # };
+
   programs.emacs = {
     enable = true;
     package = pkgs.emacs29-pgtk;
@@ -360,6 +364,7 @@ in
       clojure-mode
       haskell-mode
       zig-mode
+      python-mode
 
       quack
 
@@ -367,7 +372,8 @@ in
       all-the-icons-ivy
       bind-key
       counsel
-      gruvbox-theme
+      doom-themes
+      paren-face
       avy
       consult
       embark
@@ -424,6 +430,5 @@ in
 
   services.syncthing = {
     enable = true;
-    tray.enable = !darwin;
   };
 }

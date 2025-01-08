@@ -59,7 +59,7 @@
   "editor.cursorSmoothCaretAnimation" = "on";
   "editor.cursorStyle" = "line";
   "editor.defaultFormatter" = "denoland.vscode-deno";
-  "editor.fontFamily" = "JetBrainsMono Nerd Font";
+  "editor.fontFamily" = "JuliaMono";
   "editor.fontLigatures" = true;
   "editor.fontSize" = 16;
   "editor.formatOnSave" = true;
