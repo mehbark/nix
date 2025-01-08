@@ -96,7 +96,7 @@ in
 
     obsidian
 
-    nerd-fonts.jetbrains-mono
+    jetbrains-mono
     lmmath
     julia-mono
   ] ++ more-packages
