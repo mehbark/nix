@@ -45,11 +45,13 @@ in
     cabal-install
     sbcl
     chez
+    chicken
     guile
     gambit
     clojure
     ruby_3_3
     ruby-lsp
+    elixir
     rubocop
     lua
     maxima
@@ -76,6 +78,7 @@ in
     ffmpeg
     libjxl
     exiftool
+    gnupg
 
     akku
     ripgrep
@@ -268,6 +271,7 @@ in
       };
       core.autocrlf = false;
       init.defaultBranch = "main";
+      user.signingkey = "8CD6E1438A00F55363157881E333EC1335FFCCDB";
     };
   };
 
@@ -354,17 +358,18 @@ in
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs29-pgtk;
+    package = pkgs.emacs30-pgtk;
     extraPackages = epkgs: with epkgs; [
       lsp-mode
       markdown-mode
       yaml-mode
       json-mode
-      elixir-mode
       clojure-mode
       haskell-mode
       zig-mode
       python-mode
+
+      treesit-grammars.with-all-grammars
 
       quack
 
@@ -388,7 +393,6 @@ in
       #eshell
       orderless
       magit
-      eglot
       org
       org-roam
       paredit

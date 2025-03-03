@@ -100,7 +100,10 @@
     packages.x86_64-linux = {
       iso = nixos-generators.nixosGenerate {
         system = "x86_64-linux";
-        modules = modules;
+        modules = modules ++ [{
+          nix.registry.nixpkgs.flake = nixpkgs;
+          virtualisation.diskSize = 20 * 1024;
+        }];
         format = "iso";
       };
     };

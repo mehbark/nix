@@ -13,7 +13,7 @@
   "[html]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
   "[java]" = { "editor.suggest.snippetsPreventQuickSuggestions" = false; };
   "[javascript]" = {
-    "editor.defaultFormatter" = null;
+    "editor.defaultFormatter" = "esbenp.prettier-vscode";
     "editor.formatOnSave" = true;
   };
   "[javascriptreact]" = {

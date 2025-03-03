@@ -219,6 +219,12 @@ If the new path's directories does not exist, create them."
 ;; Nice line wrapping when working with text
 (add-hook 'text-mode-hook 'visual-line-mode)
 
+;; mix format
+(add-hook 'after-save-hook
+  '(lambda ()
+     (when (eq major-mode 'elixir-ts-mode)
+       (shell-command-to-string (format "mix format %s" (buffer-file-name))))))
+
 ;; Modes to highlight the current line with
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
@@ -482,10 +488,16 @@ If the new path's directories does not exist, create them."
           (typescript-mode . typescript-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
-          (python-mode . python-ts-mode)))
+          (python-mode . python-ts-mode)
+          (elixir-mode . elixir-ts-mode)))
+  (add-to-list 'auto-mode-alist
+    '("\\.ex\\'" . elixir-mode))
+  (add-to-list 'auto-mode-alist
+    '("\\.exs\\'" . elixir-mode))
+
   :hook
   ;; Auto parenthesis matching
-  ((prog-mode . electric-pair-mode)))
+  (prog-mode . electric-pair-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -527,17 +539,19 @@ If the new path's directories does not exist, create them."
   ;; no :ensure t here because it's built-in
 
   ;; Configure hooks to automatically turn-on eglot for selected modes
-  ; :hook
-  ; (((python-mode ruby-mode elixir-mode) . eglot))
+  :hook
+  ; (((python-mode ruby-mode) . eglot))
+  ((elixir-ts-mode . eglot-ensure))
 
   :custom
-  (eglot-send-changes-idle-time 0.1)
+  ;; let's try a higher idle time, elixir-ls is a bit finicky
+  (eglot-send-changes-idle-time 0.5)
 
   :config
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
-  ; (add-to-list 'eglot-server-programs
-  ;              '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
+  (add-to-list 'eglot-server-programs
+               '(elixir-ts-mode "${pkgs.elixir-ls}/bin/elixir-ls"))
   )
 
 ; oorg
@@ -1029,10 +1043,6 @@ If the new path's directories does not exist, create them."
   :ensure t
   :config
   (direnv-mode))
-
-(use-package lsp-mode
-  :ensure t
-  :commands (lsp lsp-deferred))
 
 ; yay
 (setq confirm-kill-processes nil)
