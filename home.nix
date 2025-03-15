@@ -49,7 +49,7 @@ in
     guile
     gambit
     clojure
-    ruby_3_3
+    ruby_3_4
     ruby-lsp
     elixir
     rubocop
@@ -132,7 +132,7 @@ in
          minigalaxy
          openrct2
          obs-studio
-         kolourpaint
+         kdePackages.kolourpaint
          audacious
          lm_sensors
          libsForQt5.krunner-symbols
@@ -143,6 +143,7 @@ in
          clippy
          rustc
          rustfmt
+         inotify-tools
        ]);
 
   home.file = {
