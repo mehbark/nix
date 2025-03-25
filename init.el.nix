@@ -541,7 +541,8 @@ If the new path's directories does not exist, create them."
   ;; Configure hooks to automatically turn-on eglot for selected modes
   :hook
   ; (((python-mode ruby-mode) . eglot))
-  ((elixir-ts-mode . eglot-ensure))
+  ((elixir-ts-mode . eglot-ensure)
+   (rust-mode . eglot-ensure))
 
   :custom
   ;; let's try a higher idle time, elixir-ls is a bit finicky
@@ -552,6 +553,10 @@ If the new path's directories does not exist, create them."
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-to-list 'eglot-server-programs
                '(elixir-ts-mode "${pkgs.elixir-ls}/bin/elixir-ls"))
+  ; i could nixify the rust-analyzer bin path buuuut
+  (add-to-list 'eglot-server-programs
+             '((rust-ts-mode rust-mode) .
+               ("rust-analyzer" :initializationOptions (:check (:command "clippy")))))
   )
 
 ; oorg

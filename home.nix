@@ -151,6 +151,7 @@ in
       url = "https://raw.githubusercontent.com/samholmes/whiskers/main/whiskers.png";
       hash = "sha256-By6sRGNyK5Myk608crIO2vrnixZ0dJjoW26Y1I23Dto=";
     };
+    ".sqliterc".text = ".mode column";
   };
 
   programs.fish = {
@@ -163,10 +164,10 @@ in
 
   programs.vscode = {
     enable = true;
-    enableUpdateCheck = false;
+    profiles.default.enableUpdateCheck = false;
+    profiles.default.userSettings = (import ./vscode-settings.nix) { inherit pkgs; };
     # i prefer to let vscode manage stuff
     mutableExtensionsDir = true;
-    userSettings = (import ./vscode-settings.nix) { inherit pkgs; };
   };
 
   programs.neovim = {

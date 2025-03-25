@@ -107,5 +107,16 @@
         format = "iso";
       };
     };
+
+    packages.aarch64-darwin = {
+      iso = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        modules = modules ++ [{
+          nix.registry.nixpkgs.flake = nixpkgs;
+          virtualisation.diskSize = 20 * 1024;
+        }];
+        format = "iso";
+      };
+    };
   };
 }
