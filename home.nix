@@ -172,7 +172,7 @@ in
 
   programs.neovim = {
     enable = true;
-    coc.enable = true;
+    coc.enable = false;
     coc.settings = ''
     {
       "rust-analyzer.checkOnSave.command": "clippy",
@@ -360,7 +360,7 @@ in
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs30-pgtk;
+    package = pkgs.emacs-pgtk.override { withNativeCompilation = !darwin; };
     extraPackages = epkgs: with epkgs; [
       lsp-mode
       markdown-mode
