@@ -54,7 +54,7 @@ in
     elixir
     rubocop
     lua
-    maxima
+    sageWithDoc
     zls
 
     # ocaml
@@ -62,7 +62,6 @@ in
     # ocamlPackages.ocaml-lsp
     # ocamlPackages.ocamlformat
 
-    idris2
     # might as well use it consistently
     haskell-language-server
     typst
@@ -116,6 +115,7 @@ in
          pkg-config
          rustup
          podman
+         wget
         ] else [
          racket
          mpv
