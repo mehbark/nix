@@ -172,7 +172,7 @@ in
 
   programs.neovim = {
     enable = true;
-    coc.enable = false;
+    coc.enable = true;
     coc.settings = ''
     {
       "rust-analyzer.checkOnSave.command": "clippy",
