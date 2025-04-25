@@ -351,4 +351,5 @@
   "zig.zls.path" =
     "/home/mbk/.config/Code/User/globalStorage/ziglang.vscode-zig/zls_install/zls";
   "purescript.exportsCodeLens" = false;
+  "chat.commandCenter.enabled" = false;
 }
